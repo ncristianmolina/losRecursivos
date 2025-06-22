@@ -5,6 +5,7 @@
 #include "tateti.h"
 #include "jugador.h"
 #include "mock.h"
+#include "partidas.h"
 #include <locale.h>
 
 #define AR_JUGADORES "jugadores.dat"
@@ -102,6 +103,14 @@ int main() {
     printf("Guardando archivo en ruta: %s\n", AR_JUGADORES);
 
 
+    stPartida partidas[100];
+
+    for (int i = 0; i < 100; i++) {
+        generarPartidaAleatoria(&partidas[i], i + 1);
+    }
+
+    guardarPartidasEnArchivo("partidas.dat", partidas, 100);
+    leerPartidasDesdeArchivo("partidas.dat");
 
     return 0;
 }

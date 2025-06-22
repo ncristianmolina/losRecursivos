@@ -162,3 +162,33 @@
 	<locale.h>
 	"mock.h"
 
+1750634366 source:c:\users\luciana\desktop\losrecursivos\main.c
+	<stdio.h>
+	<stdlib.h>
+	"inicio-sesion.h"
+	"registro.h"
+	"tateti.h"
+	"jugador.h"
+	"mock.h"
+	"partidas.h"
+	<locale.h>
+
+1750628023 c:\users\luciana\desktop\losrecursivos\inicio-sesion.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jugador.h"
+
+1750634193 source:c:\users\luciana\desktop\losrecursivos\partidas.c
+	<stdio.h>
+	<stdlib.h>
+	"inicio-sesion.h"
+	"registro.h"
+	"tateti.h"
+	"jugador.h"
+	"mock.h"
+	"partidas.h"
+	<locale.h>
+
+1750634020 c:\users\luciana\desktop\losrecursivos\partidas.h
+

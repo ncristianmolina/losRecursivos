@@ -61,7 +61,6 @@ stJugador cargarUnJugador(int ultimoID)
     while (!validarEmail(aux.email));
 
     // Username
-    // Username
     do
     {
         printf("Ingrese su nombre de usuario: ");
@@ -80,7 +79,6 @@ stJugador cargarUnJugador(int ultimoID)
 
     }
     while (!validarSoloLetras(aux.username) || existeUsernameEnArchivo(aux.username));
-
 
     // Contraseña
     do
@@ -112,12 +110,28 @@ stJugador cargarUnJugador(int ultimoID)
     }
     while (!validarDNI(aux.dni));
 
+    // Nacionalidad / País
+    do
+    {
+        printf("Ingrese su nacionalidad o país: ");
+        fflush(stdin);
+        gets(aux.pais);
+
+        if (strlen(aux.pais) == 0 || !validarSoloLetras(aux.pais))
+        {
+            printf("❌ Nacionalidad inválida. Debe contener solo letras.\n");
+        }
+
+    }
+    while (strlen(aux.pais) == 0 || !validarSoloLetras(aux.pais));
+
     printf("\n✅ ¡Registro completado con éxito!\n");
     system("pause");
     system("cls");
 
     return aux;
 }
+
 
 // ========== FUNCIONES DE VALIDACIÓN ==========
 

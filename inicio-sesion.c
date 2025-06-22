@@ -4,6 +4,7 @@
 #include "registro.h"
 #include "jugador.h"
 #include "tateti.h"
+#include "mock.h"
 #include <locale.h>
 
 // ========== LOGIN ==========

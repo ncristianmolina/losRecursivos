@@ -5,6 +5,7 @@
 #include "registro.h" // o el header correspondiente
 #include "tateti.h"
 #include <locale.h>
+#include "mock.h"
 
 // Función principal del juego. Controla la partida.
 void jugar(int contraBot) {

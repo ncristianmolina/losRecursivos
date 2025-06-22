@@ -4,6 +4,7 @@
 #include "registro.h"
 #include "jugador.h"
 #include <locale.h>
+#include "mock.h"
 
 // ========== FUNCIÓN DE REGISTRO ==========
 stJugador cargarUnJugador(int ultimoID)

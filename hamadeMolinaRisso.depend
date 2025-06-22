@@ -93,13 +93,14 @@
 	<locale.h>
 	"mock.h"
 
-1750627005 source:c:\users\windows11\desktop\hamademolinarisso\mock.c
+1750630069 source:c:\users\windows11\desktop\hamademolinarisso\mock.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<time.h>
 	<locale.h>
 	"mock.h"
+	"jugador.h"
 
 1750629999 c:\users\windows11\desktop\hamademolinarisso\mock.h
 	"jugador.h"

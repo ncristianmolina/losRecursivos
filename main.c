@@ -114,3 +114,24 @@ int main() {
 
     return 0;
 }
+
+    stJugador todosLosJugadores[TOTAL_JUGADORES];
+
+    // Copiar los jugadores precargados al arreglo total
+    /*for (int i = 0; i < NUM_JUGADORES_PRECARGADOS; i++) {
+        todosLosJugadores[i] = jugadoresPrecargados[i];
+    }*/
+
+    // Generar jugadores aleatorios
+    for (int i = NUM_JUGADORES_CARGADOS; i < TOTAL_JUGADORES; i++) {
+        generarJugadorAleatorio(&todosLosJugadores[i], i + 1);
+    }
+
+    // Mostrar todos los jugadores
+    for (int i = 0; i < TOTAL_JUGADORES; i++) {
+        imprimirJugador(todosLosJugadores[i]);
+    }
+
+    guardarJugadoresEnArchivo(AR_JUGADORES, todosLosJugadores, TOTAL_JUGADORES);
+    leerJugadoresDesdeArchivo(AR_JUGADORES);
+    printf("Guardando archivo en ruta: %s\n", AR_JUGADORES);

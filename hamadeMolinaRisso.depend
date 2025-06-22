@@ -104,3 +104,61 @@
 1750629999 c:\users\windows11\desktop\hamademolinarisso\mock.h
 	"jugador.h"
 
+1750628675 source:c:\users\luciana\desktop\losrecursivos\inicio-sesion.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"registro.h"
+	"jugador.h"
+	"tateti.h"
+	"mock.h"
+	<locale.h>
+
+1750628023 c:\users\luciana\desktop\losrecursivos\registro.h
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<ctype.h>
+	"tateti.h"
+	"jugador.h"
+
+1750628023 c:\users\luciana\desktop\losrecursivos\tateti.h
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1750630487 c:\users\luciana\desktop\losrecursivos\jugador.h
+
+1750630487 c:\users\luciana\desktop\losrecursivos\mock.h
+	"jugador.h"
+
+1750630487 source:c:\users\luciana\desktop\losrecursivos\mock.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<locale.h>
+	"mock.h"
+	"jugador.h"
+
+1750628023 source:c:\users\luciana\desktop\losrecursivos\preproceso.c
+
+1750628675 source:c:\users\luciana\desktop\losrecursivos\registro.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"registro.h"
+	"jugador.h"
+	<locale.h>
+	"mock.h"
+
+1750628675 source:c:\users\luciana\desktop\losrecursivos\tateti.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jugador.h"
+	"registro.h"
+	"tateti.h"
+	<locale.h>
+	"mock.h"
+

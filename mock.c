@@ -4,6 +4,7 @@
 #include <time.h>
 #include <locale.h>
 #include "mock.h"
+#include "jugador.h"
 
 #define AR_JUGADORES "jugadores.dat"
 
@@ -30,7 +31,7 @@ void imprimirJugador(stJugador jugador)
         printf("Email: %s\n", jugador.email);
         printf("Nombre de usuario: %s\n", jugador.username);
         printf("Contraseña: %s\n", jugador.password);
-        printf("DNI: %s\n", jugador.DNI);
+        printf("DNI: %s\n", jugador.dni);
         printf("Puntaje: %d\n", jugador.ptsTotales);
         printf("Nacionalidad: %s\n", jugador.pais);
         printf("----------------------------------------\n");
@@ -98,7 +99,7 @@ void generarJugadorAleatorio(stJugador *jugador, int idJugador) {
     sprintf(jugador->email, "%s.%s%s", jugador->nombre, jugador->apellido, dominios[rand() % (sizeof(dominios) / sizeof(dominios[0]))]);
     sprintf(jugador->username, "%s_%s_%d", objetos [rand() % (sizeof(objetos) / sizeof(objetos[0]))], adjetivos [rand() % (sizeof(adjetivos) / sizeof(adjetivos[0]))], rand ()% 10000) ;
     generarContrasena(jugador->password, 12);
-    sprintf(jugador->DNI, "%08d", (rand() % 35000001) + 20000000); // Generar DNIS ENTRE 20,000,000 and 45,000,000
+    sprintf(jugador->dni, "%08d", (rand() % 35000001) + 20000000); // Generar DNIS ENTRE 20,000,000 and 45,000,000
     jugador->ptsTotales = rand() % 100000;
     strcpy(jugador->pais, paises[rand() % (sizeof(paises) / sizeof(paises[0]))]);
     jugador->eliminado = 0;

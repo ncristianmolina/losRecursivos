@@ -1,11 +1,12 @@
 # depslib dependency file v1.0
-1749772617 source:c:\users\windows11\desktop\hamademolinarisso\main.c
+1750629757 source:c:\users\windows11\desktop\hamademolinarisso\main.c
 	<stdio.h>
 	<stdlib.h>
 	"inicio-sesion.h"
 	"registro.h"
 	"tateti.h"
 	"jugador.h"
+	"mock.h"
 	<locale.h>
 
 1749764768 c:\users\windows11\desktop\hamademolinarisso\tateti.h
@@ -15,13 +16,14 @@
 
 1749764768 source:c:\users\windows11\desktop\hamademolinarisso\preproceso.c
 
-1750291873 source:c:\users\windows11\desktop\hamademolinarisso\registro.c
+1750628553 source:c:\users\windows11\desktop\hamademolinarisso\registro.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"registro.h"
 	"jugador.h"
 	<locale.h>
+	"mock.h"
 
 1750291748 c:\users\windows11\desktop\hamademolinarisso\registro.h
 	<stdio.h>
@@ -63,13 +65,14 @@
 	"registro.h"
 	"tateti.h"
 
-1750291304 source:c:\users\windows11\desktop\hamademolinarisso\inicio-sesion.c
+1750628541 source:c:\users\windows11\desktop\hamademolinarisso\inicio-sesion.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"registro.h"
 	"jugador.h"
 	"tateti.h"
+	"mock.h"
 	<locale.h>
 
 1749764768 c:\users\windows11\desktop\hamademolinarisso\inicio-sesion.h
@@ -78,9 +81,9 @@
 	<string.h>
 	"jugador.h"
 
-1749764768 c:\users\windows11\desktop\hamademolinarisso\jugador.h
+1750629961 c:\users\windows11\desktop\hamademolinarisso\jugador.h
 
-1749772503 source:c:\users\windows11\desktop\hamademolinarisso\tateti.c
+1750628560 source:c:\users\windows11\desktop\hamademolinarisso\tateti.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -88,6 +91,7 @@
 	"registro.h"
 	"tateti.h"
 	<locale.h>
+	"mock.h"
 
 1750627005 source:c:\users\windows11\desktop\hamademolinarisso\mock.c
 	<stdio.h>
@@ -97,5 +101,6 @@
 	<locale.h>
 	"mock.h"
 
-1750627005 c:\users\windows11\desktop\hamademolinarisso\mock.h
+1750629999 c:\users\windows11\desktop\hamademolinarisso\mock.h
+	"jugador.h"
 

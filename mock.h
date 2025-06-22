@@ -1,5 +1,7 @@
 #ifndef MOCK_H_INCLUDED
 #define MOCK_H_INCLUDED
+#include "jugador.h"
+
 
 
 #define NUM_JUGADORES_ALEATORIOS 2000
@@ -8,21 +10,6 @@
 #define jugadoresPrecargados[NUM_JUGADORES_PRECARGADOS];
 
 #define AR_JUGADORES "jugadores.dat"
-
-
-
-typedef struct {
-    int idJugador;
-    char nombre[30];
-    char apellido[30];
-    char email[50];
-    char username[30];
-    char password[20];
-    char DNI [10];
-    int ptsTotales;
-    int eliminado; /// puede ser 0 = activo, 1 = eliminado
-    char pais[30];
-} stJugador;
 
 void generarContrasena(char *destino, int longitud);
 void imprimirJugador(stJugador);

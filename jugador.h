@@ -11,6 +11,8 @@ typedef struct {
     char dni[10];
     int ptsTotales;
     int eliminado; // 0 = activo, 1 = eliminado
+    char pais[30]; // campo agregado
 } stJugador;
+
 
 #endif // JUGADOR_H_INCLUDED

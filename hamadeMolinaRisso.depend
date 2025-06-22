@@ -89,3 +89,13 @@
 	"tateti.h"
 	<locale.h>
 
+1750627005 source:c:\users\windows11\desktop\hamademolinarisso\mock.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<locale.h>
+	"mock.h"
+
+1750627005 c:\users\windows11\desktop\hamademolinarisso\mock.h
+

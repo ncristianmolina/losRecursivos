@@ -6,6 +6,10 @@
 #include "jugador.h"
 #include <locale.h>
 
+#define AR_JUGADORES "jugadores.dat"
+#define AR_PARTIDAS "partidas.dat"
+
+
 
 
 int main() {

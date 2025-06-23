@@ -144,7 +144,7 @@
 
 1750628023 source:c:\users\luciana\desktop\losrecursivos\preproceso.c
 
-1750628675 source:c:\users\luciana\desktop\losrecursivos\registro.c
+1750634664 source:c:\users\luciana\desktop\losrecursivos\registro.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -163,7 +163,7 @@
 	<locale.h>
 	"mock.h"
 
-1750634366 source:c:\users\luciana\desktop\losrecursivos\main.c
+1750643864 source:c:\users\luciana\desktop\losrecursivos\main.c
 	<stdio.h>
 	<stdlib.h>
 	"inicio-sesion.h"
@@ -192,4 +192,18 @@
 	<locale.h>
 
 1750634020 c:\users\luciana\desktop\losrecursivos\partidas.h
+
+1750644021 source:c:\users\luciana\desktop\losrecursivos\partidasxjugador.c
+	<stdio.h>
+	<stdlib.h>
+	"inicio-sesion.h"
+	"registro.h"
+	"tateti.h"
+	"jugador.h"
+	"mock.h"
+	"partidas.h"
+	"partidasXjugador.h"
+	<locale.h>
+
+1750643664 c:\users\luciana\desktop\losrecursivos\partidasxjugador.h
 

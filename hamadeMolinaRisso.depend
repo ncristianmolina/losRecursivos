@@ -208,7 +208,7 @@
 
 1750643664 c:\users\luciana\desktop\losrecursivos\partidasxjugador.h
 
-1750827412 source:c:\users\cris\losrecursivos\inicio-sesion.c
+1750828284 source:c:\users\cris\losrecursivos\inicio-sesion.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -218,34 +218,32 @@
 	"mock.h"
 	<locale.h>
 
-1750827429 c:\users\cris\losrecursivos\registro.h
-	<stdio.h>
-	<string.h>
-	<stdlib.h>
-	<ctype.h>
-	"tateti.h"
+1750832398 c:\users\cris\losrecursivos\registro.h
 	"jugador.h"
 
-1750826373 c:\users\cris\losrecursivos\tateti.h
+1750831846 c:\users\cris\losrecursivos\tateti.h
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 
-1750734235 c:\users\cris\losrecursivos\jugador.h
+1750832136 c:\users\cris\losrecursivos\jugador.h
 
-1750826733 c:\users\cris\losrecursivos\mock.h
+1750832230 c:\users\cris\losrecursivos\mock.h
 	"jugador.h"
 
-1750827304 source:c:\users\cris\losrecursivos\main.c
+1750831932 source:c:\users\cris\losrecursivos\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<locale.h>
+	<time.h>
 	"jugador.h"
 	"registro.h"
 	"inicio-sesion.h"
 	"tateti.h"
 	"mock.h"
+	"partidas.h"
+	"partidasXjugador.h"
 
 1750827434 c:\users\cris\losrecursivos\inicio-sesion.h
 	<stdio.h>
@@ -255,7 +253,7 @@
 
 1750734235 c:\users\cris\losrecursivos\partidas.h
 
-1750826373 source:c:\users\cris\losrecursivos\mock.c
+1750832301 source:c:\users\cris\losrecursivos\mock.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -277,36 +275,33 @@
 
 1750551842 source:c:\users\cris\losrecursivos\preproceso.c
 
-1750827401 source:c:\users\cris\losrecursivos\registro.c
+1750832427 source:c:\users\cris\losrecursivos\registro.c
 	<stdio.h>
-	<stdlib.h>
 	<string.h>
+	<stdlib.h>
+	<ctype.h>
 	"registro.h"
 	"jugador.h"
 	<locale.h>
-	"mock.h"
 
-1750826373 source:c:\users\cris\losrecursivos\tateti.c
+1750829824 source:c:\users\cris\losrecursivos\tateti.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<locale.h>
-	"jugador.h"
-	"registro.h"
 	"tateti.h"
-	"mock.h"
 
-1750734235 c:\users\cris\losrecursivos\partidasxjugador.h
+1750831871 c:\users\cris\losrecursivos\partidasxjugador.h
+	"jugador.h"
+	"partidas.h"
 
-1750734235 source:c:\users\cris\losrecursivos\partidasxjugador.c
+1750831897 source:c:\users\cris\losrecursivos\partidasxjugador.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
+	<locale.h>
+	"jugador.h"
 	"inicio-sesion.h"
-	"registro.h"
-	"tateti.h"
-	"jugador.h"
-	"mock.h"
 	"partidas.h"
 	"partidasXjugador.h"
-	<locale.h>
 

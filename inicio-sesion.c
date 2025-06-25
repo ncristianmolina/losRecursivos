@@ -18,7 +18,7 @@ int loginJugador(stJugador* jugadorLogueado) {
         return 0;
     }
 
-    printf("\n----- INICIO DE SESIÓN -----\n");
+    printf("\n----- INICIO DE SESION -----\n");
     do {
         printf("Username: ");
         fflush(stdin);

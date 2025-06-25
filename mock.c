@@ -8,7 +8,6 @@
 
 #define AR_JUGADORES "jugadores.dat"
 
-
 void generarContrasena(char *destino, int longitud) {
     const char *caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{};:,.<>?";
     int largo = strlen(caracteres);
@@ -18,10 +17,7 @@ void generarContrasena(char *destino, int longitud) {
     destino[longitud - 1] = '\0';
 }
 
-
-
-void imprimirJugador(stJugador jugador)
-  {
+void imprimirJugador(stJugador jugador) {
     if (jugador.eliminado == 0) {
         printf("ID Jugador: %d\n", jugador.idJugador);
         printf("Nombre: %s\n", jugador.nombre);
@@ -33,79 +29,75 @@ void imprimirJugador(stJugador jugador)
         printf("Puntaje: %d\n", jugador.ptsTotales);
         printf("Nacionalidad: %s\n", jugador.pais);
         printf("----------------------------------------\n");
-      }
     }
+}
 
 void generarJugadorAleatorio(stJugador *jugador, int idJugador) {
-    const char *nombres[] = {"Juan", "Ana", "Luis", "Maria", "Pedro", "Laura","Mariano", "Sofia", "Juan", "Valentina",
-    "Mateo", "Camila", "Facundo", "Lucia", "Diego", "Abril", "Ignacio", "Catalina", "Lucas", "Martina", "Agustin",
-    "Victoria", "Tomas", "Florencia", "Santiago", "Belen","Matias", "Julieta", "Nicolas", "Joaquin",
-     "Gonzalo", "Rocío", "Facundo", "Micaela", "Luciana", "German"};
-    const char *apellidos[] = {"Perez", "Garcia", "Martinez", "Lopez", "Gonzalez", "Sanchez","Messi", "Rodriguez",
-    "Fernandez", "Gallardo", "Gomez", "Diaz", "Martinez", "Perez", "Sanchez","Romero", "Aimar", "Torres", "Alvarez",
-    "Ruiz", "Ramirez", "Gutierrez", "Morales", "Navarro", "Castro",
-    "Rios", "Romero", "Castro", "Silva", "Mendoza", "Ortiz", "Francescoli", "Maidana", "Castro", "Acosta"};
-    const char *paises[]={ "Afganistán", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda",
-    "Arabia Saudita", "Argelia", "Argentina", "Armenia", "Australia", "Austria",
-    "Azerbaiyán", "Bahamas", "Bangladesh", "Bahrein", "Barbados", "Bélgica",
-    "Belice", "Benín", "Bielorrusia", "Birmania", "Bolivia", "Bosnia y Herzegovina",
-    "Botswana", "Brasil", "Brunéi", "Bulgaria", "Burkina Faso", "Burundi",
-    "Bhutan", "Cabo Verde", "Camboya", "Camerún", "Canadá", "Catar",
-    "Chad", "Chile", "China", "Chipre", "Ciudad del Vaticano", "Colombia",
-    "Comores", "Corea del Norte", "Corea del Sur", "Costa de Marfil", "Costa Rica",
-    "Croacia", "Cuba", "Dinamarca", "Dominica", "Ecuador", "Egipto",
-    "El Salvador", "Emiratos Árabes Unidos", "Eritrea", "Eslovaquia", "Eslovenia",
-    "España", "Estados Unidos", "Estonia", "Swazilandia", "Etiopía", "Filipinas",
-    "Finlandia", "Fiji", "Francia", "Gabón", "Gambia", "Georgia", "Ghana",
-    "Granada", "Grecia", "Guatemala", "Guinea", "Guinea-Bisseau", "Guinea Ecuatorial",
-    "Guyana", "Haití", "Honduras", "Hungría", "India", "Indonesia", "Irak", "Irán",
-    "Irlanda", "Islandia", "Islas Marshall", "Islas Salomón","Palestina","Italia",
-    "Jamaica", "Japón", "Jordania", "Kazajistán", "Kenia", "Kirguistán", "Kiribati",
-    "Kuwait", "Laos", "Lesoto", "Letonia", "Líbano", "Liberia", "Libia",
-    "Liechtenstein", "Lituania", "Luxemburgo", "Madagascar", "Malasia", "Malawi",
-    "Maldivas", "Malí", "Malta", "Marruecos", "Mauricio", "Mauritania", "México",
-    "Micronesia", "Moldavia", "Mónaco", "Mongolia", "Montenegro", "Mozambique",
-    "Namibia", "Nauru", "Nepal", "Nicaragua", "Níger", "Nigeria", "Noruega",
-    "Nueva Zelanda", "Omán", "Países Bajos", "Pakistán", "Palaos", "Panamá",
-    "Papúa Nueva Guinea", "Paraguay", "Perú", "Polonia", "Portugal", "Reino Unido",
-    "República Centroafricana", "República Checa", "República del Congo",
-    "República Democrática del Congo", "República Dominicana", "Rwanda",
-    "Rumania", "Rusia", "Samoa", "San Cristóbal y Nieves", "San Marino",
-    "San Vicente y las Granadinas", "Santa Lucía", "Santo Tomé y Príncipe",
-    "Senegal", "Serbia", "Seychelles", "Sierra Leona", "Singapur", "Siria",
-    "Somalia", "Sri Lanka", "Sudáfrica", "Sudán", "Sudán del Sur", "Suecia",
-    "Suiza", "Surinam", "Tailandia", "Tanzania", "Tayikistán", "Timor Oriental",
-    "Togo", "Tonga", "Trinidad y Tobago", "Túnez", "Turkmenistán", "Turquía",
-    "Tuvalu", "Ucrania", "Uganda", "Uruguay", "Uzbekistán", "Vanuatu",
-    "Venezuela", "Vietnam", "Yemen", "Djibuti", "Zambia", "Zimbabwe", "Kosovo"};
-     const char *dominios[] = {"@gmail.com", "@hotmail.com", "@live.com", "@outlook.com", "@yahoo.com"};
-     const char* objetos[] = {
-    "luna", "sol", "estrella", "rayo", "fuego", "nube", "cielo", "mar", "roca", "bosque", "cometa","pistola", "bomba", "torpedo", "tortuga",
-     "perro", "gato", "pelota", "zapallo", "banana", "chorlito", "chicharra", "picodulce", "tomate", "mojarrita", "pescado", "lanzajabalina",
-     "Mastantuono", "Drácula", "palta"
-     };
-     const char* adjetivos[] = {
-    "brillante", "oscuro", "rápido", "misterioso", "feliz", "triste", "rojo", "azul", "salvaje", "suave", "veloz","letal", "atómica","zuripante",
-     "millonario", "crack", "molina", "mojada", "picante", "soberbia","inofensivo", "chillón", "muda","picarona", "juguetón", "mimoso", "rabioso",
-     "precoz", "mercenario", "chupasangre", "jugosa"
-      };
-
+    const char *nombres[] = {"Juan", "Ana", "Luis", "Maria", "Pedro", "Laura", "Mariano", "Sofia", "Valentina",
+                             "Mateo", "Camila", "Facundo", "Lucia", "Diego", "Abril", "Ignacio", "Catalina", "Lucas",
+                             "Martina", "Agustin", "Victoria", "Tomas", "Florencia", "Santiago", "Belen", "Matias",
+                             "Julieta", "Nicolas", "Joaquin", "Gonzalo", "Rocio", "Micaela", "Luciana", "German"};
+    const char *apellidos[] = {"Perez", "Garcia", "Martinez", "Lopez", "Gonzalez", "Sanchez", "Messi", "Rodriguez",
+                               "Fernandez", "Gallardo", "Gomez", "Diaz", "Romero", "Aimar", "Torres", "Alvarez",
+                               "Ruiz", "Ramirez", "Gutierrez", "Morales", "Navarro", "Castro", "Rios", "Silva",
+                               "Mendoza", "Ortiz", "Francescoli", "Maidana", "Acosta"};
+    const char *paises[] = {"Afganistán", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda",
+                            "Arabia Saudita", "Argelia", "Argentina", "Armenia", "Australia", "Austria",
+                            "Azerbaiyán", "Bahamas", "Bangladesh", "Bahrein", "Barbados", "Bélgica",
+                            "Belice", "Benín", "Bielorrusia", "Birmania", "Bolivia", "Bosnia y Herzegovina",
+                            "Botswana", "Brasil", "Brunéi", "Bulgaria", "Burkina Faso", "Burundi",
+                            "Bhutan", "Cabo Verde", "Camboya", "Camerún", "Canadá", "Catar",
+                            "Chad", "Chile", "China", "Chipre", "Ciudad del Vaticano", "Colombia",
+                            "Comores", "Corea del Norte", "Corea del Sur", "Costa de Marfil", "Costa Rica",
+                            "Croacia", "Cuba", "Dinamarca", "Dominica", "Ecuador", "Egipto",
+                            "El Salvador", "Emiratos Árabes Unidos", "Eritrea", "Eslovaquia", "Eslovenia",
+                            "España", "Estados Unidos", "Estonia", "Swazilandia", "Etiopía", "Filipinas",
+                            "Finlandia", "Fiji", "Francia", "Gabón", "Gambia", "Georgia", "Ghana",
+                            "Granada", "Grecia", "Guatemala", "Guinea", "Guinea-Bisseau", "Guinea Ecuatorial",
+                            "Guyana", "Haití", "Honduras", "Hungría", "India", "Indonesia", "Irak", "Irán",
+                            "Irlanda", "Islandia", "Islas Marshall", "Islas Salomón", "Palestina", "Italia",
+                            "Jamaica", "Japón", "Jordania", "Kazajistán", "Kenia", "Kirguistán", "Kiribati",
+                            "Kuwait", "Laos", "Lesoto", "Letonia", "Líbano", "Liberia", "Libia",
+                            "Liechtenstein", "Lituania", "Luxemburgo", "Madagascar", "Malasia", "Malawi",
+                            "Maldivas", "Malí", "Malta", "Marruecos", "Mauricio", "Mauritania", "México",
+                            "Micronesia", "Moldavia", "Mónaco", "Mongolia", "Montenegro", "Mozambique",
+                            "Namibia", "Nauru", "Nepal", "Nicaragua", "Níger", "Nigeria", "Noruega",
+                            "Nueva Zelanda", "Omán", "Países Bajos", "Pakistán", "Palaos", "Panamá",
+                            "Papúa Nueva Guinea", "Paraguay", "Perú", "Polonia", "Portugal", "Reino Unido",
+                            "República Centroafricana", "República Checa", "República del Congo",
+                            "República Democrática del Congo", "República Dominicana", "Rwanda",
+                            "Rumania", "Rusia", "Samoa", "San Cristóbal y Nieves", "San Marino",
+                            "San Vicente y las Granadinas", "Santa Lucía", "Santo Tomé y Príncipe",
+                            "Senegal", "Serbia", "Seychelles", "Sierra Leona", "Singapur", "Siria",
+                            "Somalia", "Sri Lanka", "Sudáfrica", "Sudán", "Sudán del Sur", "Suecia",
+                            "Suiza", "Surinam", "Tailandia", "Tanzania", "Tayikistán", "Timor Oriental",
+                            "Togo", "Tonga", "Trinidad y Tobago", "Túnez", "Turkmenistán", "Turquía",
+                            "Tuvalu", "Ucrania", "Uganda", "Uruguay", "Uzbekistán", "Vanuatu",
+                            "Venezuela", "Vietnam", "Yemen", "Djibuti", "Zambia", "Zimbabwe", "Kosovo"};
+    const char *dominios[] = {"@gmail.com", "@hotmail.com", "@live.com", "@outlook.com", "@yahoo.com"};
+    const char *objetos[] = {"luna", "sol", "estrella", "rayo", "fuego", "nube", "cielo", "mar", "roca", "bosque",
+                             "cometa", "pistola", "bomba", "torpedo", "tortuga", "perro", "gato", "pelota",
+                             "zapallo", "banana", "chorlito", "chicharra", "picodulce", "tomate", "mojarrita",
+                             "pescado", "lanzajabalina", "Mastantuono", "Dracula", "palta"};
+    const char *adjetivos[] = {"brillante", "oscuro", "rapido", "misterioso", "feliz", "triste", "rojo", "azul",
+                               "salvaje", "suave", "veloz", "letal", "atomica", "zuripante", "millonario", "crack",
+                               "molina", "mojada", "picante", "soberbia", "inofensivo", "chillon", "muda",
+                               "picarona", "jugueton", "mimoso", "rabioso", "precoz", "mercenario", "chupasangre",
+                               "jugosa"};
 
     jugador->idJugador = idJugador;
     strcpy(jugador->nombre, nombres[rand() % (sizeof(nombres) / sizeof(nombres[0]))]);
     strcpy(jugador->apellido, apellidos[rand() % (sizeof(apellidos) / sizeof(apellidos[0]))]);
     sprintf(jugador->email, "%s.%s%s", jugador->nombre, jugador->apellido, dominios[rand() % (sizeof(dominios) / sizeof(dominios[0]))]);
-    sprintf(jugador->username, "%s_%s_%d", objetos [rand() % (sizeof(objetos) / sizeof(objetos[0]))], adjetivos [rand() % (sizeof(adjetivos) / sizeof(adjetivos[0]))], rand ()% 10000) ;
+    sprintf(jugador->username, "%s_%s_%d", objetos[rand() % (sizeof(objetos) / sizeof(objetos[0]))], adjetivos[rand() % (sizeof(adjetivos) / sizeof(adjetivos[0]))], rand() % 10000);
     generarContrasena(jugador->password, 12);
-    sprintf(jugador->dni, "%08d", (rand() % 35000001) + 20000000); // Generar DNIS ENTRE 20,000,000 and 45,000,000
+    sprintf(jugador->dni, "%08d", (rand() % 35000001) + 20000000); // Generar DNIs entre 20,000,000 y 55,000,000
     jugador->ptsTotales = rand() % 100000;
     strcpy(jugador->pais, paises[rand() % (sizeof(paises) / sizeof(paises[0]))]);
     jugador->eliminado = 0;
+}
 
-    }
-
-
-    void generarYGuardarJugadores(int cantidad) {
+void generarYGuardarJugadores(int cantidad) {
     stJugador j;
     for (int i = 0; i < cantidad; i++) {
         int nuevoID = obtenerUltimoIDPlayer() + 1;
@@ -115,18 +107,14 @@ void generarJugadorAleatorio(stJugador *jugador, int idJugador) {
     printf("Se generaron y guardaron %d jugadores.\n", cantidad);
 }
 
-
-   void guardarJugadoresEnArchivo(const char *nombreArchivo, stJugador *jugadores, int cantidad) {
+void guardarJugadoresEnArchivo(const char *nombreArchivo, stJugador *jugadores, int cantidad) {
     FILE *archi = fopen(nombreArchivo, "ab");
     if (archi) {
         fwrite(jugadores, sizeof(stJugador), cantidad, archi);
         fclose(archi);
-        printf("Se guardaron %d jugadores en el archivo \n", cantidad);
+        printf("Se guardaron %d jugadores en el archivo\n", cantidad);
     }
-
-
 }
-
 
 void leerJugadoresDesdeArchivo(const char *nombreArchivo) {
     FILE *archi = fopen(nombreArchivo, "rb");
@@ -140,43 +128,41 @@ void leerJugadoresDesdeArchivo(const char *nombreArchivo) {
     }
 }
 
-  int obtenerUltimoIDPlayer() {
-    FILE *archi = fopen("jugadores.dat", "rb");
+int obtenerUltimoIDPlayer() {
+    FILE *archi = fopen(AR_JUGADORES, "rb");
     stJugador aux;
     int id = 0;
 
     if (archi) {
-                while (fread(&aux, sizeof(stJugador), 1, archi)) {
-                if (aux.idJugador > id) id = aux.idJugador;
-                }
-     fclose(archi);
+        while (fread(&aux, sizeof(stJugador), 1, archi)) {
+            if (aux.idJugador > id) id = aux.idJugador;
+        }
+        fclose(archi);
     }
 
     return id;
-  }
-
-
+}
 
 void actualizarJugadorEnArchivo(stJugador jugador) {
-    FILE *archi = fopen("jugadores.dat", "r+b");
-    int encontrado = 0;
-
+    FILE *archi = fopen(AR_JUGADORES, "r+b");
     if (archi) {
         stJugador aux;
-        while (fread(&aux, sizeof(stJugador), 1, archi) == 1 && !encontrado) {
+        while (fread(&aux, sizeof(stJugador), 1, archi)) {
             if (aux.idJugador == jugador.idJugador) {
-                fseek(archi, -sizeof(stJugador), SEEK_CUR);
-                fwrite(&jugador, sizeof(stJugador), 1, archi);
-                encontrado = 1;
+                long pos = ftell(archi) - sizeof(stJugador);
+                if (pos >= 0) {
+                    fseek(archi, pos, SEEK_SET);
+                    fwrite(&jugador, sizeof(stJugador), 1, archi);
+                    break;
+                }
             }
         }
         fclose(archi);
     }
 }
 
-
- int guardaJugadorArchivo(stJugador jugador) {
-    FILE *archi = fopen("jugadores.dat", "ab");
+int guardaJugadorArchivo(stJugador jugador) {
+    FILE *archi = fopen(AR_JUGADORES, "ab");
     int resultado = 0; // 0 = error, 1 = éxito
 
     if (archi) {
@@ -188,5 +174,3 @@ void actualizarJugadorEnArchivo(stJugador jugador) {
 
     return resultado;
 }
-
-

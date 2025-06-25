@@ -2,17 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#include "jugador.h"
-#include "registro.h"
 #include "tateti.h"
-#include "mock.h"
-
 
 #define SIZE 3
 
 // Función principal del juego. Controla la partida.
-void jugar(int contraBot, int dificultad)
- {
+// Devuelve: 1 = Jugador 1 gana, 2 = Jugador 2 gana, 0 = empate
+int jugar(int contraBot, int dificultad) {
     char tablero[3][3];
     char jugador = JUGADOR1;
     int juegoTerminado = 0;
@@ -22,7 +18,10 @@ void jugar(int contraBot, int dificultad)
     if (contraBot) {
         printf("\nSeleccione dificultad:\n1. Fácil\n2. Difícil\nOpción: ");
         scanf("%d", &dificultad);
-        fflush(stdin);
+        while (getchar() != '\n'); // Limpiar búfer en lugar de fflush(stdin)
+        if (dificultad != 1 && dificultad != 2) {
+            dificultad = 1; // Por defecto, fácil
+        }
     }
 
     while (!juegoTerminado) {
@@ -33,14 +32,18 @@ void jugar(int contraBot, int dificultad)
             mostrarTablero(tablero);
             printf("¡Jugador %c ha ganado!\n", jugador);
             juegoTerminado = 1;
+            return (jugador == JUGADOR1) ? 1 : 2; // 1 si gana Jugador 1, 2 si gana Jugador 2
         } else if (tableroLleno(tablero)) {
             mostrarTablero(tablero);
             printf("¡Empate!\n");
             juegoTerminado = 1;
+            return 0; // Empate
         } else {
             jugador = (jugador == JUGADOR1) ? JUGADOR2 : JUGADOR1;
         }
     }
+
+    return 0; // Por completitud, aunque no debería llegar aquí
 }
 
 void inicializarTablero(char tablero[3][3]) {
@@ -82,6 +85,7 @@ void pedirMovimiento(char tablero[3][3], char jugador, int contraBot, int dificu
         do {
             printf("Jugador %c, elija una casilla (1-9): ", jugador);
             scanf(" %c", &input);
+            while (getchar() != '\n'); // Limpiar búfer
             if (input >= '1' && input <= '9') {
                 numeroACoordenadas(input - '1' + 1, &fila, &col);
             } else {
@@ -120,8 +124,6 @@ int tableroLleno(char tablero[3][3]) {
                 return 0;
     return 1;
 }
-
-// --- Lógica de dificultad ---
 
 int casillaRandom(char tablero[3][3], char jugador) {
     int fila, col, casilla;

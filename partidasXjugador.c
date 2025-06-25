@@ -1,60 +1,51 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "inicio-sesion.h"
-#include "registro.h"
-#include "tateti.h"
+#include <string.h>
+#include <locale.h>
 #include "jugador.h"
-#include "mock.h"
+#include "inicio-sesion.h"
 #include "partidas.h"
 #include "partidasXjugador.h"
-#include <locale.h>
 
 #define AR_PARTIDASXJUGADOR "partidasxjugador.dat"
+#define ARCHIVO_JUGADORES "jugadores.dat"
 
-void imprimirPartidasporJugador(stPartidaXJugador pxj)
-  {
-        printf("ID Partida Jugador: %d\n", pxj.idPartidaJugador);
-        printf("ID Partida: %d\n", pxj.idPartida);
-        printf("ID Jugador: %d\n", pxj.idJugador);
-        printf("Resultado: %d\n", pxj.resultado);
-        printf("Puntos Jugador: %d\n", pxj.puntosJugador);
-        printf("----------------------------------------\n");
-   }
+void imprimirPartidasporJugador(stPartidaXJugador pxj) {
+    printf("ID Partida Jugador: %d\n", pxj.idPartidaJugador);
+    printf("ID Partida: %d\n", pxj.idPartida);
+    printf("ID Jugador: %d\n", pxj.idJugador);
+    printf("Resultado: %d (0=derrota, 1=victoria, 2=empate)\n", pxj.resultado);
+    printf("Puntos Jugador: %d\n", pxj.puntosJugador);
+    printf("----------------------------------------\n");
+}
 
-
-
-
-stPartidaXJugador generarPartidaXJugador(int idPartidaJugador, int idPartida, int idJugador) {
+stPartidaXJugador generarPartidaXJugador(int idPartidaJugador, int idPartida, int idJugador, int resultado) {
     stPartidaXJugador pxj;
     pxj.idPartidaJugador = idPartidaJugador;
     pxj.idPartida = idPartida;
     pxj.idJugador = idJugador;
-    pxj.resultado = rand() % 3; // 0, 1 o 2
+    pxj.resultado = resultado;
 
     if (pxj.resultado == 1)
-    pxj.puntosJugador = 3;     // victoria
+        pxj.puntosJugador = 3;     // victoria
     else if (pxj.resultado == 2)
-    pxj.puntosJugador = 1;     // empate
+        pxj.puntosJugador = 1;     // empate
     else
-    pxj.puntosJugador = 0;     // derrota
+        pxj.puntosJugador = 0;     // derrota
 
     return pxj;
 }
 
-
-
-
- void guardarPartidasxJugadorEnArchivo(const char *nombreArchivo, stPartidaXJugador *pxj, int cantidad) {
+void guardarPartidasxJugadorEnArchivo(const char *nombreArchivo, stPartidaXJugador *pxj, int cantidad) {
     FILE *archi = fopen(nombreArchivo, "ab");
     if (archi) {
         fwrite(pxj, sizeof(stPartidaXJugador), cantidad, archi);
         fclose(archi);
         printf("Se guardaron %d partidas por jugador en el archivo binario.\n", cantidad);
+    } else {
+        printf("Error al abrir el archivo %s.\n", nombreArchivo);
     }
-
-
 }
-
 
 void leerPartidasPorJugadorDesdeArchivo(const char *nombreArchivo) {
     FILE *archi = fopen(nombreArchivo, "rb");
@@ -65,19 +56,207 @@ void leerPartidasPorJugadorDesdeArchivo(const char *nombreArchivo) {
             imprimirPartidasporJugador(pxj);
         }
         fclose(archi);
+    } else {
+        printf("Error al abrir el archivo %s.\n", nombreArchivo);
     }
 }
 
-
 void generarYGuardarPartidasXJugador(const char *archivo, stJugador *jugadores, int cantJugadores, stPartida *partidas, int cantPartidas) {
     stPartidaXJugador registros[CANT_PARTIDAS_X_JUGADOR];
+    int ultimoID = 0;
+
+    // Obtener el último ID de partida por jugador
+    FILE *archi = fopen(archivo, "rb");
+    if (archi) {
+        fseek(archi, 0, SEEK_END);
+        long long totalRegistros = ftell(archi) / sizeof(stPartidaXJugador);
+        if (totalRegistros > 0) {
+            fseek(archi, -1 * (long long)sizeof(stPartidaXJugador), SEEK_END);
+            stPartidaXJugador aux;
+            fread(&aux, sizeof(stPartidaXJugador), 1, archi);
+            ultimoID = aux.idPartidaJugador;
+        }
+        fclose(archi);
+    }
 
     for (int i = 0; i < CANT_PARTIDAS_X_JUGADOR; i++) {
         int idJugador = jugadores[rand() % cantJugadores].idJugador;
         int idPartida = partidas[rand() % cantPartidas].idPartida;
+        int resultado = rand() % 3; // 0=derrota, 1=victoria, 2=empate
 
-        registros[i] = generarPartidaXJugador(i + 1, idPartida, idJugador);
+        registros[i] = generarPartidaXJugador(ultimoID + i + 1, idPartida, idJugador, resultado);
+
+        // Actualizar puntos del jugador
+        stJugador jugador;
+        FILE *jugadoresFile = fopen(ARCHIVO_JUGADORES, "rb+");
+        if (jugadoresFile) {
+            while (fread(&jugador, sizeof(stJugador), 1, jugadoresFile) == 1) {
+                if (jugador.idJugador == idJugador && !jugador.eliminado) {
+                    jugador.ptsTotales += registros[i].puntosJugador;
+                    fseek(jugadoresFile, -1 * (long long)sizeof(stJugador), SEEK_CUR);
+                    fwrite(&jugador, sizeof(stJugador), 1, jugadoresFile);
+                    break;
+                }
+            }
+            fclose(jugadoresFile);
+        }
     }
 
     guardarPartidasxJugadorEnArchivo(archivo, registros, CANT_PARTIDAS_X_JUGADOR);
+}
+
+void generarPartidaXJugadorParaLogueado(stJugador jugador, int idPartida) {
+    FILE *archi = fopen(AR_PARTIDASXJUGADOR, "rb");
+    int ultimoID = 0;
+    stPartidaXJugador aux;
+
+    // Obtener el último ID de partida por jugador
+    if (archi) {
+        fseek(archi, 0, SEEK_END);
+        long long totalRegistros = ftell(archi) / sizeof(stPartidaXJugador);
+        if (totalRegistros > 0) {
+            fseek(archi, -1 * (long long)sizeof(stPartidaXJugador), SEEK_END);
+            fread(&aux, sizeof(stPartidaXJugador), 1, archi);
+            ultimoID = aux.idPartidaJugador;
+        }
+        fclose(archi);
+    }
+
+    // Generar y guardar la partida por jugador
+    int resultado = rand() % 3; // Simulado para máquina
+    stPartidaXJugador pxj = generarPartidaXJugador(ultimoID + 1, idPartida, jugador.idJugador, resultado);
+    guardarPartidasxJugadorEnArchivo(AR_PARTIDASXJUGADOR, &pxj, 1);
+
+    // Actualizar puntos del jugador
+    jugador.ptsTotales += pxj.puntosJugador;
+    guardarCambiosJugador(jugador);
+
+    printf("DEBUG: Partida por jugador guardada - ID Partida: %d, ID Jugador: %d, Resultado: %d, Puntos: %d\n",
+           pxj.idPartida, pxj.idJugador, pxj.resultado, pxj.puntosJugador);
+}
+
+void generarPartidaXJugadorParaVersus(stJugador jugador1, stJugador jugador2, int idPartida, int resultadoPartida) {
+    FILE *archi = fopen(AR_PARTIDASXJUGADOR, "rb");
+    int ultimoID = 0;
+    stPartidaXJugador aux;
+
+    // Obtener el último ID de partida por jugador
+    if (archi) {
+        fseek(archi, 0, SEEK_END);
+        long long totalRegistros = ftell(archi) / sizeof(stPartidaXJugador);
+        if (totalRegistros > 0) {
+            fseek(archi, -1 * (long long)sizeof(stPartidaXJugador), SEEK_END);
+            fread(&aux, sizeof(stPartidaXJugador), 1, archi);
+            ultimoID = aux.idPartidaJugador;
+        }
+        fclose(archi);
+    }
+
+    // Determinar resultados para cada jugador
+    int resultado1, resultado2;
+    if (resultadoPartida == 1) { // Jugador 1 gana
+        resultado1 = 1; // Victoria
+        resultado2 = 0; // Derrota
+    } else if (resultadoPartida == 2) { // Jugador 2 gana
+        resultado1 = 0; // Derrota
+        resultado2 = 1; // Victoria
+    } else { // Empate
+        resultado1 = 2; // Empate
+        resultado2 = 2; // Empate
+    }
+
+    // Generar y guardar partida para Jugador 1
+    stPartidaXJugador pxj1 = generarPartidaXJugador(ultimoID + 1, idPartida, jugador1.idJugador, resultado1);
+    guardarPartidasxJugadorEnArchivo(AR_PARTIDASXJUGADOR, &pxj1, 1);
+    jugador1.ptsTotales += pxj1.puntosJugador;
+    guardarCambiosJugador(jugador1);
+    printf("DEBUG: Partida para Jugador 1 (%s) - ID Partida: %d, Resultado: %d, Puntos: %d\n",
+           jugador1.username, idPartida, pxj1.resultado, pxj1.puntosJugador);
+
+    // Generar y guardar partida para Jugador 2
+    stPartidaXJugador pxj2 = generarPartidaXJugador(ultimoID + 2, idPartida, jugador2.idJugador, resultado2);
+    guardarPartidasxJugadorEnArchivo(AR_PARTIDASXJUGADOR, &pxj2, 1);
+    jugador2.ptsTotales += pxj2.puntosJugador;
+    guardarCambiosJugador(jugador2);
+    printf("DEBUG: Partida para Jugador 2 (%s) - ID Partida: %d, Resultado: %d, Puntos: %d\n",
+           jugador2.username, idPartida, pxj2.resultado, pxj2.puntosJugador);
+}
+
+void mostrarHistorialPartidasJugador(int idJugador) {
+    FILE *archi = fopen(AR_PARTIDASXJUGADOR, "rb");
+    if (archi) {
+        stPartidaXJugador pxj;
+        printf("\n--- Historial de partidas del jugador ID %d ---\n", idJugador);
+        int found = 0;
+        while (fread(&pxj, sizeof(stPartidaXJugador), 1, archi) == 1) {
+            if (pxj.idJugador == idJugador) {
+                imprimirPartidasporJugador(pxj);
+                found = 1;
+            }
+        }
+        if (!found) {
+            printf("No se encontraron partidas para el jugador ID %d.\n", idJugador);
+        }
+        fclose(archi);
+    } else {
+        printf("Error al abrir el archivo %s.\n", AR_PARTIDASXJUGADOR);
+    }
+}
+
+void mostrarRankingJugadores() {
+    FILE *archi = fopen(ARCHIVO_JUGADORES, "rb");
+    if (archi) {
+        stJugador jugadores[100];
+        int count = 0;
+
+        // Leer todos los jugadores
+        while (fread(&jugadores[count], sizeof(stJugador), 1, archi) == 1 && count < 100) {
+            if (!jugadores[count].eliminado) {
+                count++;
+            }
+        }
+        fclose(archi);
+
+        // Ordenar por puntos (burbujeo descendente)
+        for (int i = 0; i < count - 1; i++) {
+            for (int j = 0; j < count - i - 1; j++) {
+                if (jugadores[j].ptsTotales < jugadores[j + 1].ptsTotales) {
+                    stJugador temp = jugadores[j];
+                    jugadores[j] = jugadores[j + 1];
+                    jugadores[j + 1] = temp;
+                }
+            }
+        }
+
+        // Mostrar ranking
+        printf("\n--- Ranking de jugadores ---\n");
+        for (int i = 0; i < count; i++) {
+            printf("%d. %s %s (ID: %d, Username: %s) - Puntos: %d\n",
+                   i + 1, jugadores[i].nombre, jugadores[i].apellido, jugadores[i].idJugador, jugadores[i].username, jugadores[i].ptsTotales);
+        }
+        if (count == 0) {
+            printf("No hay jugadores registrados.\n");
+        }
+    } else {
+        printf("Error al abrir el archivo %s.\n", ARCHIVO_JUGADORES);
+    }
+}
+
+int obtenerUltimoIdPartidaXJugador() {
+    FILE *archi = fopen(AR_PARTIDASXJUGADOR, "rb");
+    int ultimoID = 0;
+    stPartidaXJugador aux;
+
+    if (archi) {
+        fseek(archi, 0, SEEK_END);
+        long long totalRegistros = ftell(archi) / sizeof(stPartidaXJugador);
+        if (totalRegistros > 0) {
+            fseek(archi, -1 * (long long)sizeof(stPartidaXJugador), SEEK_END);
+            fread(&aux, sizeof(stPartidaXJugador), 1, archi);
+            ultimoID = aux.idPartidaJugador;
+        }
+        fclose(archi);
+    }
+
+    return ultimoID;
 }

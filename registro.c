@@ -1,12 +1,11 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
 #include "registro.h"
 #include "jugador.h"
 #include <locale.h>
-#include "mock.h"
 
-// ========== FUNCIÓN DE REGISTRO ==========
 stJugador cargarUnJugador(int ultimoID) {
     stJugador aux;
     memset(&aux, 0, sizeof(stJugador)); // Inicializar para evitar basura
@@ -17,7 +16,6 @@ stJugador cargarUnJugador(int ultimoID) {
 
     do {
         printf("Ingrese su nombre: ");
-        fflush(stdin);
         fgets(aux.nombre, sizeof(aux.nombre), stdin);
         aux.nombre[strcspn(aux.nombre, "\n")] = '\0';
         printf("DEBUG: Nombre ingresado: '%s'\n", aux.nombre);
@@ -28,7 +26,6 @@ stJugador cargarUnJugador(int ultimoID) {
 
     do {
         printf("Ingrese su apellido: ");
-        fflush(stdin);
         fgets(aux.apellido, sizeof(aux.apellido), stdin);
         aux.apellido[strcspn(aux.apellido, "\n")] = '\0';
         printf("DEBUG: Apellido ingresado: '%s'\n", aux.apellido);
@@ -39,7 +36,6 @@ stJugador cargarUnJugador(int ultimoID) {
 
     do {
         printf("Ingrese su email: ");
-        fflush(stdin);
         fgets(aux.email, sizeof(aux.email), stdin);
         aux.email[strcspn(aux.email, "\n")] = '\0';
         printf("DEBUG: Email ingresado: '%s'\n", aux.email);
@@ -50,7 +46,6 @@ stJugador cargarUnJugador(int ultimoID) {
 
     do {
         printf("Ingrese su nombre de usuario: ");
-        fflush(stdin);
         fgets(aux.username, sizeof(aux.username), stdin);
         aux.username[strcspn(aux.username, "\n")] = '\0';
         convertirMinusculas(aux.username);
@@ -64,7 +59,6 @@ stJugador cargarUnJugador(int ultimoID) {
 
     do {
         printf("Ingrese su contraseña (mínimo una mayúscula y una minúscula): ");
-        fflush(stdin);
         fgets(aux.password, sizeof(aux.password), stdin);
         aux.password[strcspn(aux.password, "\n")] = '\0';
         printf("DEBUG: Password ingresado: '%s'\n", aux.password);
@@ -75,7 +69,6 @@ stJugador cargarUnJugador(int ultimoID) {
 
     do {
         printf("Ingrese su DNI: ");
-        fflush(stdin);
         fgets(aux.dni, sizeof(aux.dni), stdin);
         aux.dni[strcspn(aux.dni, "\n")] = '\0';
         printf("DEBUG: DNI ingresado: '%s'\n", aux.dni);
@@ -86,7 +79,6 @@ stJugador cargarUnJugador(int ultimoID) {
 
     do {
         printf("Ingrese su nacionalidad o país: ");
-        fflush(stdin);
         fgets(aux.pais, sizeof(aux.pais), stdin);
         aux.pais[strcspn(aux.pais, "\n")] = '\0';
         printf("DEBUG: Pais ingresado: '%s'\n", aux.pais);
@@ -102,12 +94,10 @@ stJugador cargarUnJugador(int ultimoID) {
     return aux;
 }
 
-// ========== FUNCIONES DE VALIDACIÓN ==========
-
 int validarSoloLetras(char cadena[]) {
     int i = 0, valido = 1;
-    while (cadena[i] != '\0' && valido == 1) {
-        if (!((cadena[i] >= 65 && cadena[i] <= 90) || (cadena[i] >= 97 && cadena[i] <= 122))) {
+    while (cadena[i] != '\0' && valido) {
+        if (!isalpha(cadena[i])) {
             valido = 0;
         }
         i++;
@@ -116,25 +106,23 @@ int validarSoloLetras(char cadena[]) {
 }
 
 int validarPassword(char clave[]) {
-    int i = 0, tieneMayuscula = 0, tieneMinuscula = 0, valido = 0;
+    int i = 0, tieneMayuscula = 0, tieneMinuscula = 0;
     while (clave[i] != '\0') {
-        if (clave[i] >= 65 && clave[i] <= 90) tieneMayuscula = 1;
-        if (clave[i] >= 97 && clave[i] <= 122) tieneMinuscula = 1;
+        if (isupper(clave[i])) tieneMayuscula = 1;
+        if (islower(clave[i])) tieneMinuscula = 1;
         i++;
     }
-    if (tieneMayuscula && tieneMinuscula) valido = 1;
-    return valido;
+    return tieneMayuscula && tieneMinuscula;
 }
 
 int validarEmail(char correo[]) {
-    int i = 0, tieneArroba = 0, tienePunto = 0, valido = 0;
+    int i = 0, tieneArroba = 0, tienePunto = 0;
     while (correo[i] != '\0') {
-        if (correo[i] == '@') tieneArroba = 1;
-        if (correo[i] == '.') tienePunto = 1;
+        if (correo[i] == '@') tieneArroba++;
+        if (correo[i] == '.') tienePunto++;
         i++;
     }
-    if (tieneArroba && tienePunto) valido = 1;
-    return valido;
+    return tieneArroba == 1 && tienePunto >= 1;
 }
 
 int validarDNI(char dni[]) {
@@ -142,8 +130,8 @@ int validarDNI(char dni[]) {
     if (longitud < 7 || longitud > 9) {
         valido = 0;
     } else {
-        while (dni[i] != '\0' && valido == 1) {
-            if (!(dni[i] >= 48 && dni[i] <= 57)) {
+        while (dni[i] != '\0' && valido) {
+            if (!isdigit(dni[i])) {
                 valido = 0;
             }
             i++;
@@ -155,27 +143,24 @@ int validarDNI(char dni[]) {
 void convertirMinusculas(char cadena[]) {
     int i = 0;
     while (cadena[i] != '\0') {
-        if (cadena[i] >= 65 && cadena[i] <= 90) {
-            cadena[i] += 32;
-        }
+        cadena[i] = tolower(cadena[i]);
         i++;
     }
 }
 
-// ========== FUNCIONES DE ARCHIVO ==========
-
 int obtenerUltimoID() {
-    FILE* archivo = fopen("jugadores.dat", "rb");
+    FILE *archivo = fopen(ARCHIVO_JUGADORES, "rb");
     stJugador aux;
     int ultimoID = 0;
 
-    if (archivo != NULL) {
+    if (archivo) {
         fseek(archivo, 0, SEEK_END);
-        int totalJugadores = ftell(archivo) / sizeof(stJugador);
-        if (totalJugadores > 0) {
-            fseek(archivo, -1 * sizeof(stJugador), SEEK_END);
-            fread(&aux, sizeof(stJugador), 1, archivo);
-            ultimoID = aux.idJugador;
+        long pos = ftell(archivo);
+        if (pos > 0 && pos != -1) {
+            fseek(archivo, pos - sizeof(stJugador), SEEK_SET);
+            if (fread(&aux, sizeof(stJugador), 1, archivo) == 1) {
+                ultimoID = aux.idJugador;
+            }
         }
         fclose(archivo);
     }
@@ -184,24 +169,24 @@ int obtenerUltimoID() {
 }
 
 void guardarJugadorArchivo(stJugador jugador) {
-    FILE* archivo = fopen("jugadores.dat", "ab");
-    if (archivo != NULL) {
+    FILE *archivo = fopen(ARCHIVO_JUGADORES, "ab");
+    if (archivo) {
         fwrite(&jugador, sizeof(stJugador), 1, archivo);
         fclose(archivo);
-        printf("DEBUG: Jugador guardado - Username: '%s', Password: '%s'\n", jugador.username, jugador.password); // Depuración
+        printf("DEBUG: Jugador guardado - Username: '%s', Password: '%s'\n", jugador.username, jugador.password);
     } else {
-        printf("Error al abrir el archivo.\n");
+        printf("Error al abrir el archivo %s.\n", ARCHIVO_JUGADORES);
     }
 }
 
 int existeUsernameEnArchivo(char username[]) {
-    FILE* archivo = fopen(ARCHIVO_JUGADORES, "rb");
+    FILE *archivo = fopen(ARCHIVO_JUGADORES, "rb");
     stJugador aux;
     int existe = 0;
 
-    if (archivo != NULL) {
-        while (fread(&aux, sizeof(stJugador), 1, archivo) > 0) {
-            if (strcmpi(aux.username, username) == 0 && aux.eliminado == 0) {
+    if (archivo) {
+        while (fread(&aux, sizeof(stJugador), 1, archivo)) {
+            if (strcasecmp(aux.username, username) == 0 && !aux.eliminado) {
                 existe = 1;
                 break;
             }
@@ -212,28 +197,28 @@ int existeUsernameEnArchivo(char username[]) {
     return existe;
 }
 
-// ========== DEPURACIÓN ==========
-
 void imprimirJugadoresArchivo() {
-    FILE* arch = fopen(ARCHIVO_JUGADORES, "rb");
-    stJugador aux;
+    FILE *arch = fopen(ARCHIVO_JUGADORES, "rb");
     if (arch) {
+        stJugador aux;
         printf("\n--- Contenido de jugadores.dat ---\n");
-        while (fread(&aux, sizeof(stJugador), 1, arch) > 0) {
-            printf("ID: %d\n", aux.idJugador);
-            printf("Nombre: %s\n", aux.nombre);
-            printf("Apellido: %s\n", aux.apellido);
-            printf("Email: %s\n", aux.email);
-            printf("Username: %s\n", aux.username);
-            printf("Password: %s\n", aux.password);
-            printf("DNI: %s\n", aux.dni);
-            printf("Pais: %s\n", aux.pais);
-            printf("Puntos: %d\n", aux.ptsTotales);
-            printf("Eliminado: %d\n", aux.eliminado);
-            printf("------------------------\n");
+        while (fread(&aux, sizeof(stJugador), 1, arch)) {
+            if (!aux.eliminado) {
+                printf("ID: %d\n", aux.idJugador);
+                printf("Nombre: %s\n", aux.nombre);
+                printf("Apellido: %s\n", aux.apellido);
+                printf("Email: %s\n", aux.email);
+                printf("Username: %s\n", aux.username);
+                printf("Password: %s\n", aux.password);
+                printf("DNI: %s\n", aux.dni);
+                printf("Pais: %s\n", aux.pais);
+                printf("Puntos: %d\n", aux.ptsTotales);
+                printf("Eliminado: %d\n", aux.eliminado);
+                printf("------------------------\n");
+            }
         }
         fclose(arch);
     } else {
-        printf("Error al abrir jugadores.dat para depuración.\n");
+        printf("Error al abrir %s para depuración.\n", ARCHIVO_JUGADORES);
     }
 }

@@ -16,6 +16,8 @@ int esMovimientoValido(char tablero[3][3], int fila, int col);
 void pedirMovimiento(char tablero[3][3], char jugador, int contraBot, int dificultad);
 int hayGanador(char tablero[3][3], char jugador);
 int tableroLleno(char tablero[3][3]);
-void jugar(int contraBot, int dificultad);
+int jugar(int contraBot, int dificultad);
+int casillaRandom(char tablero[3][3], char jugador);
+int dificultadDificil(char tablero[3][3], char jugador);
 
 #endif // TATETI_H_INCLUDED

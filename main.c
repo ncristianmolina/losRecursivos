@@ -27,6 +27,7 @@ int main() {
         printf("5. Ver archivo partidas\n");
         printf("6. Ver archivo partidas por jugador\n");
         printf("7. Cargar jugadores\n");
+        printf("8. Cargar partidas\n");
         printf("Seleccione una opcion: ");
         scanf("%d", &opcion);
         fflush(stdin);
@@ -104,6 +105,15 @@ int main() {
                     generarYGuardarJugadores(n);
                     break;
                     }
+
+            case 8: {
+                    int n;
+                    printf("Partidas a generar ");
+                    scanf("%d", &n);
+                    generarYGuardarPartidas(n);
+                    break;
+                    }
+
 
             default:
                 printf("❌ Opción no válida. Intente de nuevo.\n");

@@ -10,6 +10,34 @@
 
 #define AR_PARTIDAS "partidas.dat"
 
+#define GANADOR 1
+#define EMPATE 2
+#define PERDEDOR 0
+
+
+int obtenerUltimoIDPartida() {
+    FILE *archi = fopen("partidas.dat", "rb");
+    int ultimoID = 0;
+
+    if (archi) {
+        stPartida partida;
+
+
+        while (fread(&partida, sizeof(stPartida), 1, archi) == 1) {
+            if (partida.idPartida > ultimoID) {
+                ultimoID = partida.idPartida;
+            }
+        }
+        fclose(archi);
+    }
+
+    return ultimoID;
+}
+
+
+
+
+
 void imprimirPartidas(stPartida partida)
   {
         printf("ID Partida: %d\n", partida.idPartida);
@@ -56,3 +84,24 @@ void leerPartidasDesdeArchivo(const char *nombreArchivo) {
         fclose(archi);
     }
 }
+
+int calcularPuntos(int resultado) {
+    if (resultado == GANADOR) return 3;
+    else if (resultado == EMPATE) return 1;
+    else return 0;
+}
+
+void generarYGuardarPartidas(int cantidad) {
+    stPartida p;
+    int ultimoID = obtenerUltimoIDPartida();
+
+    for (int i = 0; i < cantidad; i++) {
+        int nuevoID = ultimoID + i + 1;
+        generarPartidaAleatoria(&p, nuevoID);
+        guardarPartidasEnArchivo(AR_PARTIDAS, &p, 1);
+    }
+}
+
+
+
+

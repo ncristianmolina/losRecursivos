@@ -58,23 +58,28 @@ void leerPartidasPorJugadorDesdeArchivo(const char *nombreArchivo) {
     }
 }
 
-void generarYGuardarPartidasXJugador(const char *archivo, stJugador *jugadores, int cantJugadores, stPartida *partidas, int cantPartidas) {
-    stPartidaXJugador registros[CANT_PARTIDAS_X_JUGADOR];
-    int ultimoID = 0;
 
-    // Obtener el último ID de partida por jugador
-    FILE *archi = fopen(archivo, "rb");
+int obtenerUltimoIdPartidaXJugador() {
+    FILE *archi = fopen(AR_PARTIDASXJUGADOR, "rb");
+    int ultimoID = 0;
+    stPartidaXJugador aux;
+
     if (archi) {
         fseek(archi, 0, SEEK_END);
         long long totalRegistros = ftell(archi) / sizeof(stPartidaXJugador);
         if (totalRegistros > 0) {
             fseek(archi, -1 * (long long)sizeof(stPartidaXJugador), SEEK_END);
-            stPartidaXJugador aux;
             fread(&aux, sizeof(stPartidaXJugador), 1, archi);
             ultimoID = aux.idPartidaJugador;
         }
         fclose(archi);
     }
+    return ultimoID;
+}
+
+void generarYGuardarPartidasXJugador(const char *archivo, stJugador *jugadores, int cantJugadores, stPartida *partidas, int cantPartidas) {
+    stPartidaXJugador registros[CANT_PARTIDAS_X_JUGADOR];
+    int ultimoID = obtenerUltimoIdPartidaXJugador();
 
     for (int i = 0; i < CANT_PARTIDAS_X_JUGADOR; i++) {
         int idJugador = jugadores[rand() % cantJugadores].idJugador;
@@ -92,7 +97,6 @@ void generarYGuardarPartidasXJugador(const char *archivo, stJugador *jugadores, 
                     jugador.ptsTotales += registros[i].puntosJugador;
                     fseek(jugadoresFile, -1 * (long long)sizeof(stJugador), SEEK_CUR);
                     fwrite(&jugador, sizeof(stJugador), 1, jugadoresFile);
-                    break;
                 }
             }
             fclose(jugadoresFile);
@@ -277,21 +281,3 @@ void mostrarRankingJugadores() {
     }
 }
 
-int obtenerUltimoIdPartidaXJugador() {
-    FILE *archi = fopen(AR_PARTIDASXJUGADOR, "rb");
-    int ultimoID = 0;
-    stPartidaXJugador aux;
-
-    if (archi) {
-        fseek(archi, 0, SEEK_END);
-        long long totalRegistros = ftell(archi) / sizeof(stPartidaXJugador);
-        if (totalRegistros > 0) {
-            fseek(archi, -1 * (long long)sizeof(stPartidaXJugador), SEEK_END);
-            fread(&aux, sizeof(stPartidaXJugador), 1, archi);
-            ultimoID = aux.idPartidaJugador;
-        }
-        fclose(archi);
-    }
-
-    return ultimoID;
-}

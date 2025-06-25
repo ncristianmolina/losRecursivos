@@ -281,3 +281,23 @@ void mostrarRankingJugadores() {
     }
 }
 
+void generarYGuardarPartidasXJugadorAutom(int cantidad) {
+    stPartidaXJugador *registros = malloc(cantidad * sizeof(stPartidaXJugador));
+    if (!registros) {
+        printf("Error al reservar memoria.\n");
+        return;
+    }
+
+    int ultimoID = obtenerUltimoIdPartidaXJugador();
+
+    for (int i = 0; i < cantidad; i++) {
+        int idPartida = rand() % 1000 + 1;   // podés reemplazar por un id real
+        int idJugador = rand() % 2000 + 1;   // idem
+        int resultado = rand() % 3;
+
+        registros[i] = generarPartidaXJugador(ultimoID + i + 1, idPartida, idJugador, resultado);
+    }
+
+    guardarPartidasxJugadorEnArchivo(AR_PARTIDASXJUGADOR, registros, cantidad);
+    free(registros);
+}

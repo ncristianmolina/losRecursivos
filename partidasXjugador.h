@@ -25,5 +25,6 @@ void generarPartidaXJugadorParaVersus(stJugador jugador1, stJugador jugador2, in
 void mostrarHistorialPartidasJugador(int idJugador);
 void mostrarRankingJugadores(void);
 int obtenerUltimoIdPartidaXJugador(void);
+void generarYGuardarPartidasXJugadorAutom(int cantidad);
 
 #endif // PARTIDASXJUGADOR_H_INCLUDED

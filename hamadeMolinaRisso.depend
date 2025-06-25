@@ -188,7 +188,7 @@
 
 1750886869 c:\users\luciana\desktop\losrecursivos\partidas.h
 
-1750890994 source:c:\users\luciana\desktop\losrecursivos\partidasxjugador.c
+1750894310 source:c:\users\luciana\desktop\losrecursivos\partidasxjugador.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -198,7 +198,7 @@
 	"partidas.h"
 	"partidasXjugador.h"
 
-1750885459 c:\users\luciana\desktop\losrecursivos\partidasxjugador.h
+1750894343 c:\users\luciana\desktop\losrecursivos\partidasxjugador.h
 	"jugador.h"
 	"partidas.h"
 

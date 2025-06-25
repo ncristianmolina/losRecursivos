@@ -70,6 +70,7 @@ int main() {
         printf("7. Ver archivo partidas por jugador\n");
         printf("8. Cargar jugadores\n");
         printf("9. Cargar partidas\n");
+        printf("10. Cargar partidas por jugador\n");
 
         printf("Seleccione una opción: ");
         scanf("%d", &opcion);
@@ -237,6 +238,14 @@ int main() {
                     generarYGuardarPartidas(n);
                     break;
                     }
+            case 10: {
+                      int n;
+                      printf("Partidas por jugador a generar: ");
+                      scanf("%d", &n);
+                      generarYGuardarPartidasXJugadorAutom(n);  // llamamos a la función nueva
+                      break;
+                      }
+
             default:
                 printf("Opción no válida.\n");
         }

@@ -133,7 +133,7 @@
 1750630487 c:\users\luciana\desktop\losrecursivos\mock.h
 	"jugador.h"
 
-1750630487 source:c:\users\luciana\desktop\losrecursivos\mock.c
+1750815978 source:c:\users\luciana\desktop\losrecursivos\mock.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -163,7 +163,7 @@
 	<locale.h>
 	"mock.h"
 
-1750798965 source:c:\users\luciana\desktop\losrecursivos\main.c
+1750816118 source:c:\users\luciana\desktop\losrecursivos\main.c
 	<stdio.h>
 	<stdlib.h>
 	"inicio-sesion.h"
@@ -172,6 +172,7 @@
 	"jugador.h"
 	"mock.h"
 	"partidas.h"
+	"partidasXjugador.h"
 	<locale.h>
 
 1750628023 c:\users\luciana\desktop\losrecursivos\inicio-sesion.h

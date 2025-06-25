@@ -96,13 +96,13 @@ int main() {
                 leerPartidasPorJugadorDesdeArchivo(AR_PARTIDASXJUGADOR);
                 break;
 
-           case 7:
-                int n;
-                printf("¿Cuántos jugadores generar? ");
-                scanf("%d", &n);
-                generarYGuardarJugadores(n);
-                break;
-
+           case 7: {
+                    int n;
+                    printf("¿Cuántos jugadores generar? ");
+                    scanf("%d", &n);
+                    generarYGuardarJugadores(n);
+                    break;
+                    }
 
             default:
                 printf("❌ Opción no válida. Intente de nuevo.\n");

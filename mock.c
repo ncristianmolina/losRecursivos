@@ -106,12 +106,24 @@ void generarJugadorAleatorio(stJugador *jugador, int idJugador) {
 
     }
 
+
+    void generarYGuardarJugadores(int cantidad) {
+    stJugador j;
+    for (int i = 0; i < cantidad; i++) {
+        int nuevoID = obtenerUltimoIDJugador() + 1;
+        generarJugadorAleatorio(&j, nuevoID);
+        guardarJugadorArchivo(j);
+    }
+    printf("Se generaron y guardaron %d jugadores.\n", cantidad);
+}
+
+
    void guardarJugadoresEnArchivo(const char *nombreArchivo, stJugador *jugadores, int cantidad) {
     FILE *archi = fopen(nombreArchivo, "ab");
     if (archi) {
         fwrite(jugadores, sizeof(stJugador), cantidad, archi);
         fclose(archi);
-        printf("Se guardaron %d jugadores en el archivo binario.\n", cantidad);
+        printf("Se guardaron %d jugadores en el archivo \n", cantidad);
     }
 
 
@@ -129,3 +141,54 @@ void leerJugadoresDesdeArchivo(const char *nombreArchivo) {
         fclose(archi);
     }
 }
+
+int obtenerUltimoID() {
+    FILE *archi = fopen("jugadores.dat", "rb");
+    stJugador aux;
+    int id = 0;
+
+    if (archi) {
+        while (fread(&aux, sizeof(stJugador), 1, archi)) {
+            if (aux.idJugador > id) id = aux.idJugador;
+        }
+        fclose(archi);
+    }
+
+    return id;
+}
+
+
+
+void actualizarJugadorEnArchivo(stJugador jugador) {
+    FILE *archi = fopen("jugadores.dat", "r+b");
+    int encontrado = 0;
+
+    if (archi) {
+        stJugador aux;
+        while (fread(&aux, sizeof(stJugador), 1, archi) == 1 && !encontrado) {
+            if (aux.idJugador == jugador.idJugador) {
+                fseek(archi, -sizeof(stJugador), SEEK_CUR);
+                fwrite(&jugador, sizeof(stJugador), 1, archi);
+                encontrado = 1;
+            }
+        }
+        fclose(archi);
+    }
+}
+
+
+int guardarJugadorArchivo(stJugador jugador) {
+    FILE *archi = fopen("jugadores.dat", "ab");
+    int resultado = 0; // 0 = error, 1 = éxito
+
+    if (archi) {
+        if (fwrite(&jugador, sizeof(stJugador), 1, archi) == 1) {
+            resultado = 1;
+        }
+        fclose(archi);
+    }
+
+    return resultado;
+}
+
+

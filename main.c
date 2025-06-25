@@ -32,7 +32,7 @@ int mostrarSubmenuAutenticacion(stJugador *jugador, int jugadorNumero) {
                 *jugador = cargarUnJugador(ultimoID);
                 guardarJugadorArchivo(*jugador);
                 printf("\n Jugador %d registrado con éxito!\n", jugadorNumero);
-                imprimirJugadoresArchivo(); // Depuración
+                //imprimirJugadoresArchivo(); // Depuración
                 return 1; // Autenticado
             }
             case 2: {
@@ -81,7 +81,7 @@ int main() {
                 stJugador nuevoJugador = cargarUnJugador(ultimoID);
                 guardarJugadorArchivo(nuevoJugador);
                 printf("\n ¡Registrado con éxito!\n");
-                imprimirJugadoresArchivo(); // Depuración
+                //imprimirJugadoresArchivo(); // Depuración
                 break;
             }
             case 2: {
@@ -147,13 +147,13 @@ int main() {
                                 // Autenticar Jugador 2
                                 stJugador jugador2;
                                 if (!mostrarSubmenuAutenticacion(&jugador2, 2)) {
-                                    printf("❌ Partida cancelada: Jugador 2 no autenticado.\n");
+                                    printf(" Partida cancelada: Jugador 2 no autenticado.\n");
                                     break;
                                 }
 
                                 // Verificar que los jugadores sean diferentes
                                 if (jugador1.idJugador == jugador2.idJugador) {
-                                    printf("❌ No puedes jugar contra ti mismo.\n");
+                                    printf("No puedes jugar contra ti mismo.\n");
                                     break;
                                 }
 
@@ -238,7 +238,7 @@ int main() {
                     break;
                     }
             default:
-                printf("❌ Opción no válida.\n");
+                printf("Opción no válida.\n");
         }
     }
 

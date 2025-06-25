@@ -40,8 +40,6 @@ int loginJugador(stJugador* jugadorLogueado) {
     int encontrado = 0;
 
     while (fread(&aux, sizeof(stJugador), 1, arch) > 0) {
-        printf("DEBUG: Leyendo jugador - Username: '%s', Password: '%s', Eliminado: %d\n",
-               aux.username, aux.password, aux.eliminado);
         if (strcmp(aux.username, username) == 0 && strcmp(aux.password, password) == 0 && aux.eliminado == 0) {
             *jugadorLogueado = aux;
             encontrado = 1;

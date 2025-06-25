@@ -155,7 +155,7 @@
 	<locale.h>
 	"tateti.h"
 
-1750886964 source:c:\users\luciana\desktop\losrecursivos\main.c
+1750888025 source:c:\users\luciana\desktop\losrecursivos\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -175,7 +175,7 @@
 	<string.h>
 	"jugador.h"
 
-1750818582 source:c:\users\luciana\desktop\losrecursivos\partidas.c
+1750889951 source:c:\users\luciana\desktop\losrecursivos\partidas.c
 	<stdio.h>
 	<stdlib.h>
 	"inicio-sesion.h"
@@ -188,7 +188,7 @@
 
 1750886869 c:\users\luciana\desktop\losrecursivos\partidas.h
 
-1750885459 source:c:\users\luciana\desktop\losrecursivos\partidasxjugador.c
+1750890994 source:c:\users\luciana\desktop\losrecursivos\partidasxjugador.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

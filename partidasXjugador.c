@@ -41,10 +41,9 @@ void guardarPartidasxJugadorEnArchivo(const char *nombreArchivo, stPartidaXJugad
     if (archi) {
         fwrite(pxj, sizeof(stPartidaXJugador), cantidad, archi);
         fclose(archi);
-        printf("Se guardaron %d partidas por jugador en el archivo binario.\n", cantidad);
-    } else {
-        printf("Error al abrir el archivo %s.\n", nombreArchivo);
     }
+    printf("Se guardaron %d partidas por jugador en el archivo.\n", cantidad);
+
 }
 
 void leerPartidasPorJugadorDesdeArchivo(const char *nombreArchivo) {
@@ -56,8 +55,6 @@ void leerPartidasPorJugadorDesdeArchivo(const char *nombreArchivo) {
             imprimirPartidasporJugador(pxj);
         }
         fclose(archi);
-    } else {
-        printf("Error al abrir el archivo %s.\n", nombreArchivo);
     }
 }
 
@@ -104,6 +101,8 @@ void generarYGuardarPartidasXJugador(const char *archivo, stJugador *jugadores, 
 
     guardarPartidasxJugadorEnArchivo(archivo, registros, CANT_PARTIDAS_X_JUGADOR);
 }
+
+
 
 void generarPartidaXJugadorParaLogueado(stJugador jugador, int idPartida) {
     FILE *archi = fopen(AR_PARTIDASXJUGADOR, "rb");
@@ -202,6 +201,42 @@ void mostrarHistorialPartidasJugador(int idJugador) {
         printf("Error al abrir el archivo %s.\n", AR_PARTIDASXJUGADOR);
     }
 }
+
+
+void guardarPartidaYRegistros(stJugador *j1, stJugador *j2, int resultado1, int resultado2, const char *modo) {
+    int idPartida = obtenerUltimoIDPartida() + 1;
+
+    stPartida partida = {0};
+    partida.idPartida = idPartida;
+    partida.esContraCpu = (j2 == NULL) ? 1 : 0;
+    strcpy(partida.dificultad, modo);
+
+    guardarPartidasEnArchivo("partidas.dat", &partida, 1);
+
+    stPartidaXJugador pxj[2];
+    pxj[0] = generarPartidaXJugador(idPartida * 2 - 1, idPartida, j1->idJugador, resultado1);
+
+    int cantidad = 1;
+
+    if (j2 != NULL) {
+        pxj[1] = generarPartidaXJugador(idPartida * 2, idPartida, j2->idJugador, resultado2);
+        cantidad = 2;
+    }
+
+    guardarPartidasxJugadorEnArchivo(AR_PARTIDASXJUGADOR, pxj, cantidad);
+
+    j1->ptsTotales += pxj[0].puntosJugador;
+    actualizarJugadorEnArchivo(*j1);
+
+    if (j2 != NULL) {
+        j2->ptsTotales += pxj[1].puntosJugador;
+        actualizarJugadorEnArchivo(*j2);
+    }
+}
+
+
+
+
 
 void mostrarRankingJugadores() {
     FILE *archi = fopen(ARCHIVO_JUGADORES, "rb");

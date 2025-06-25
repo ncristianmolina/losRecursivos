@@ -105,7 +105,7 @@
 1750629999 c:\users\windows11\desktop\hamademolinarisso\mock.h
 	"jugador.h"
 
-1750628675 source:c:\users\luciana\desktop\losrecursivos\inicio-sesion.c
+1750885459 source:c:\users\luciana\desktop\losrecursivos\inicio-sesion.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -115,25 +115,20 @@
 	"mock.h"
 	<locale.h>
 
-1750628023 c:\users\luciana\desktop\losrecursivos\registro.h
-	<stdio.h>
-	<string.h>
-	<stdlib.h>
-	<ctype.h>
-	"tateti.h"
+1750885459 c:\users\luciana\desktop\losrecursivos\registro.h
 	"jugador.h"
 
-1750628023 c:\users\luciana\desktop\losrecursivos\tateti.h
+1750885459 c:\users\luciana\desktop\losrecursivos\tateti.h
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 
 1750630487 c:\users\luciana\desktop\losrecursivos\jugador.h
 
-1750817293 c:\users\luciana\desktop\losrecursivos\mock.h
+1750885459 c:\users\luciana\desktop\losrecursivos\mock.h
 	"jugador.h"
 
-1750817579 source:c:\users\luciana\desktop\losrecursivos\mock.c
+1750885459 source:c:\users\luciana\desktop\losrecursivos\mock.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -144,38 +139,37 @@
 
 1750628023 source:c:\users\luciana\desktop\losrecursivos\preproceso.c
 
-1750634664 source:c:\users\luciana\desktop\losrecursivos\registro.c
+1750885459 source:c:\users\luciana\desktop\losrecursivos\registro.c
 	<stdio.h>
-	<stdlib.h>
 	<string.h>
+	<stdlib.h>
+	<ctype.h>
 	"registro.h"
 	"jugador.h"
 	<locale.h>
-	"mock.h"
 
-1750628675 source:c:\users\luciana\desktop\losrecursivos\tateti.c
+1750885459 source:c:\users\luciana\desktop\losrecursivos\tateti.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
-	"jugador.h"
-	"registro.h"
+	<locale.h>
 	"tateti.h"
-	<locale.h>
-	"mock.h"
 
-1750818326 source:c:\users\luciana\desktop\losrecursivos\main.c
+1750886964 source:c:\users\luciana\desktop\losrecursivos\main.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
+	<locale.h>
+	<time.h>
+	"jugador.h"
+	"registro.h"
 	"inicio-sesion.h"
-	"registro.h"
 	"tateti.h"
-	"jugador.h"
 	"mock.h"
 	"partidas.h"
 	"partidasXjugador.h"
-	<locale.h>
 
-1750628023 c:\users\luciana\desktop\losrecursivos\inicio-sesion.h
+1750885459 c:\users\luciana\desktop\losrecursivos\inicio-sesion.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -192,21 +186,21 @@
 	"partidas.h"
 	<locale.h>
 
-1750634020 c:\users\luciana\desktop\losrecursivos\partidas.h
+1750886869 c:\users\luciana\desktop\losrecursivos\partidas.h
 
-1750644021 source:c:\users\luciana\desktop\losrecursivos\partidasxjugador.c
+1750885459 source:c:\users\luciana\desktop\losrecursivos\partidasxjugador.c
 	<stdio.h>
 	<stdlib.h>
-	"inicio-sesion.h"
-	"registro.h"
-	"tateti.h"
+	<string.h>
+	<locale.h>
 	"jugador.h"
-	"mock.h"
+	"inicio-sesion.h"
 	"partidas.h"
 	"partidasXjugador.h"
-	<locale.h>
 
-1750643664 c:\users\luciana\desktop\losrecursivos\partidasxjugador.h
+1750885459 c:\users\luciana\desktop\losrecursivos\partidasxjugador.h
+	"jugador.h"
+	"partidas.h"
 
 1750828284 source:c:\users\cris\losrecursivos\inicio-sesion.c
 	<stdio.h>

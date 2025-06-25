@@ -9,8 +9,6 @@
 #define AR_JUGADORES "jugadores.dat"
 
 
-
-
 void generarContrasena(char *destino, int longitud) {
     const char *caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{};:,.<>?";
     int largo = strlen(caracteres);
@@ -112,7 +110,7 @@ void generarJugadorAleatorio(stJugador *jugador, int idJugador) {
     for (int i = 0; i < cantidad; i++) {
         int nuevoID = obtenerUltimoIDPlayer() + 1;
         generarJugadorAleatorio(&j, nuevoID);
-        guardarJugadorArchivo(j);
+        guardaJugadorArchivo(j);
     }
     printf("Se generaron y guardaron %d jugadores.\n", cantidad);
 }
@@ -177,7 +175,7 @@ void actualizarJugadorEnArchivo(stJugador jugador) {
 }
 
 
-/*int guardarJugadorArchivo(stJugador jugador) {
+ int guardaJugadorArchivo(stJugador jugador) {
     FILE *archi = fopen("jugadores.dat", "ab");
     int resultado = 0; // 0 = error, 1 = éxito
 
@@ -190,5 +188,5 @@ void actualizarJugadorEnArchivo(stJugador jugador) {
 
     return resultado;
 }
-*/
+
 

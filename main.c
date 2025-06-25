@@ -26,6 +26,7 @@ int main() {
         printf("4. Ver archivo jugadores\n");
         printf("5. Ver archivo partidas\n");
         printf("6. Ver archivo partidas por jugador\n");
+        printf("7. Cargar jugadores\n");
         printf("Seleccione una opcion: ");
         scanf("%d", &opcion);
         fflush(stdin);

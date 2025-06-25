@@ -14,6 +14,6 @@ void leerJugadoresDesdeArchivo(const char *nombreArchivo);
 void leerJugadoresDesdeArchivo(const char *nombreArchivo);
 int obtenerUltimoIDPlayer();
 void generarYGuardarJugadores(int cantidad);
-
+int guardaJugadorArchivo(stJugador jugador);
 
 #endif // MOCK_H_INCLUDED

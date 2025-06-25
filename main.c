@@ -54,7 +54,7 @@ int mostrarSubmenuAutenticacion(stJugador *jugador, int jugadorNumero) {
 }
 
 int main() {
-    setlocale(LC_ALL, "Spanish");
+    setlocale(LC_ALL, "");
     srand(time(NULL)); // Inicializar la semilla para rand()
 
     int opcion, salir = 0;

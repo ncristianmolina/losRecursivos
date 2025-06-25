@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+<<<<<<< HEAD
 #include "inicio-sesion.h"
 #include "registro.h"
 #include "tateti.h"
@@ -7,16 +8,30 @@
 #include "mock.h"
 #include "partidas.h"
 #include "partidasXjugador.h"
+=======
+#include <string.h>
+>>>>>>> 937ef31 (Funcion login y registro, dificultad facil y dificil)
 #include <locale.h>
+#include "jugador.h"
+#include "registro.h"
+#include "inicio-sesion.h"
+#include "tateti.h"
+#include "mock.h"
 
+#define ARCHIVO_JUGADORES "jugadores.dat"
+#define TOTAL_JUGADORES 10
+#define NUM_JUGADORES_CARGADOS 4
 #define AR_JUGADORES "jugadores.dat"
+<<<<<<< HEAD
 #define AR_PARTIDAS "partidas.dat"
 #define AR_PARTIDASXJUGADOR    "partidasxjugador.dat"
+=======
+>>>>>>> 937ef31 (Funcion login y registro, dificultad facil y dificil)
 
 int main() {
-    setlocale(LC_ALL, "");
-    int opcion;
-    int salir = 0;
+    setlocale(LC_ALL, "Spanish"); // Configura la codificación para caracteres en español
+
+    int opcion, salir = 0;
 
     while (!salir) {
         printf("\n============== MENU PRINCIPAL ==============\n");
@@ -30,7 +45,7 @@ int main() {
         printf("8. Cargar partidas\n");
         printf("Seleccione una opcion: ");
         scanf("%d", &opcion);
-        fflush(stdin);
+        while (getchar() != '\n'); // Consumir el salto de línea
 
         switch (opcion) {
             case 1: {
@@ -38,11 +53,11 @@ int main() {
                 stJugador nuevoJugador = cargarUnJugador(ultimoID);
                 guardarJugadorArchivo(nuevoJugador);
                 printf("\n✅ ¡Jugador registrado con éxito!\n");
+                imprimirJugadoresArchivo(); // Depuración
                 break;
             }
             case 2: {
                 stJugador jugadorLogueado;
-
                 if (loginJugador(&jugadorLogueado)) {
                     int opcionPostLogin;
                     int cerrarSesion = 0;
@@ -55,18 +70,31 @@ int main() {
                         printf("4. Cerrar sesión\n");
                         printf("Seleccione una opción: ");
                         scanf("%d", &opcionPostLogin);
-                        fflush(stdin);
+                        while (getchar() != '\n'); // Consumir el salto de línea
 
                         switch (opcionPostLogin) {
-                            case 1:
-                                jugar(1); // contra la máquina
+                            case 1: {
+                                int dificultad;
+                                printf("\nSeleccione la dificultad:\n");
+                                printf("1. Fácil\n");
+                                printf("2. Difícil\n");
+                                printf("Opción: ");
+                                scanf("%d", &dificultad);
+                                while (getchar() != '\n'); // Consumir el salto de línea
+
+                                if (dificultad == 1 || dificultad == 2) {
+                                    jugar(1, dificultad);
+                                } else {
+                                    printf("❌ Dificultad inválida.\n");
+                                }
                                 break;
+                            }
                             case 2:
-                                jugar(0); // contra otro jugador
+                                jugar(0, 0); // modo 2 jugadores, sin dificultad
                                 break;
                             case 3:
                                 eliminarCuenta(&jugadorLogueado);
-                                cerrarSesion = 1; // se desloguea tras eliminar
+                                cerrarSesion = 1;
                                 break;
                             case 4:
                                 cerrarSesion = 1;
@@ -120,6 +148,7 @@ int main() {
         }
     }
 
+<<<<<<< HEAD
 //    stJugador todosLosJugadores[TOTAL_JUGADORES];
 
     /// Copiar los jugadores precargados al arreglo total
@@ -152,10 +181,28 @@ int main() {
     //leerPartidasDesdeArchivo(AR_PARTIDAS);
         ///
 
+=======
+    // Código de generación aleatoria comentado
+    /*
+    stJugador todosLosJugadores[TOTAL_JUGADORES];
+    for (int i = NUM_JUGADORES_CARGADOS; i < TOTAL_JUGADORES; i++) {
+        generarJugadorAleatorio(&todosLosJugadores[i], i + 1);
+    }
+    for (int i = 0; i < TOTAL_JUGADORES; i++) {
+        imprimirJugador(todosLosJugadores[i]);
+    }
+    guardarJugadoresEnArchivo(AR_JUGADORES, todosLosJugadores, TOTAL_JUGADORES);
+    leerJugadoresDesdeArchivo(AR_JUGADORES);
+    printf("Guardando archivo en ruta: %s\n", AR_JUGADORES);
+
+    stPartida partidas[100];
+    for (int i = 0; i < 100; i++) {
+        generarPartidaAleatoria(&partidas[i], i + 1);
+    }
+    guardarPartidasEnArchivo("partidas.dat", partidas, 100);
+    leerPartidasDesdeArchivo("partidas.dat");
+    */
+>>>>>>> 937ef31 (Funcion login y registro, dificultad facil y dificil)
 
     return 0;
 }
-
-
-
-

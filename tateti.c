@@ -1,23 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "jugador.h"
-#include "registro.h" // o el header correspondiente
-#include "tateti.h"
 #include <locale.h>
+#include "jugador.h"
+#include "registro.h"
+#include "tateti.h"
 #include "mock.h"
 
+
+#define SIZE 3
+
 // Función principal del juego. Controla la partida.
-void jugar(int contraBot) {
+void jugar(int contraBot, int dificultad)
+ {
     char tablero[3][3];
     char jugador = JUGADOR1;
     int juegoTerminado = 0;
 
     inicializarTablero(tablero);
 
+    if (contraBot) {
+        printf("\nSeleccione dificultad:\n1. Fácil\n2. Difícil\nOpción: ");
+        scanf("%d", &dificultad);
+        fflush(stdin);
+    }
+
     while (!juegoTerminado) {
         mostrarTablero(tablero);
-        pedirMovimiento(tablero, jugador, contraBot);
+        pedirMovimiento(tablero, jugador, contraBot, dificultad);
 
         if (hayGanador(tablero, jugador)) {
             mostrarTablero(tablero);
@@ -28,17 +38,11 @@ void jugar(int contraBot) {
             printf("¡Empate!\n");
             juegoTerminado = 1;
         } else {
-            // Cambia de jugador
-            if (jugador == JUGADOR1) {
-                  jugador = JUGADOR2;
-            } else {
-                 jugador = JUGADOR1;
-                  }
+            jugador = (jugador == JUGADOR1) ? JUGADOR2 : JUGADOR1;
         }
     }
 }
 
-// Inicializa el tablero con los números del 1 al 9 como caracteres
 void inicializarTablero(char tablero[3][3]) {
     char num = '1';
     for (int i = 0; i < 3; i++)
@@ -46,7 +50,6 @@ void inicializarTablero(char tablero[3][3]) {
             tablero[i][j] = num++;
 }
 
-// Muestra el estado actual del tablero
 void mostrarTablero(char tablero[3][3]) {
     system("cls");
     printf("\n");
@@ -57,88 +60,122 @@ void mostrarTablero(char tablero[3][3]) {
     printf("\n");
 }
 
+int esMovimientoValido(char tablero[3][3], int fila, int col) {
+    return tablero[fila][col] != JUGADOR1 && tablero[fila][col] != JUGADOR2;
+}
 
-
-
-// Pide al jugador que ingrese una jugada, o elige automáticamente si es el bot
-void pedirMovimiento(char tablero[3][3], char jugador, int contraBot) {
+void pedirMovimiento(char tablero[3][3], char jugador, int contraBot, int dificultad) {
     int fila, col;
     char input;
 
     if (contraBot && jugador == JUGADOR2) {
-        int num;
-        do {
-            num = (rand() % 9) + 1;
-            numeroACoordenadas(num, &fila, &col);
-        } while (!esMovimientoValido(tablero, fila, col));
-        printf("Bot elige la casilla %d\n", num);
+        int casilla;
+        if (dificultad == 2) {
+            casilla = dificultadDificil(tablero, jugador);
+        } else {
+            casilla = casillaRandom(tablero, jugador);
+        }
+        numeroACoordenadas(casilla, &fila, &col);
+        printf("Bot elige la casilla %d\n", casilla);
         tablero[fila][col] = jugador;
     } else {
         do {
             printf("Jugador %c, elija una casilla (1-9): ", jugador);
             scanf(" %c", &input);
-
             if (input >= '1' && input <= '9') {
                 numeroACoordenadas(input - '1' + 1, &fila, &col);
             } else {
                 printf("Entrada inválida. Solo se permiten números del 1 al 9.\n");
                 continue;
             }
-
         } while (!(input >= '1' && input <= '9') || !esMovimientoValido(tablero, fila, col));
 
         tablero[fila][col] = jugador;
     }
 }
 
-// Convierte un número del 1 al 9 en coordenadas fila y columna del tablero
 void numeroACoordenadas(int num, int *fila, int *col) {
     int indice = num - 1;
     *fila = indice / 3;
     *col = indice % 3;
 }
-// Verifica si el casillero no está ocupado por un jugador
-int esMovimientoValido(char tablero[3][3], int fila, int col) {
-    int valido = 0;
-    if (tablero[fila][col] != JUGADOR1 && tablero[fila][col] != JUGADOR2) {
-        valido = 1;
-    }
-    return valido;
-}
 
-// Determina si un jugador ha ganado
 int hayGanador(char tablero[3][3], char jugador) {
-    int gano = 0;
-
-    // Verifica filas y columnas
     for (int i = 0; i < 3; i++) {
         if ((tablero[i][0] == jugador && tablero[i][1] == jugador && tablero[i][2] == jugador) ||
-            (tablero[0][i] == jugador && tablero[1][i] == jugador && tablero[2][i] == jugador)) {
-            gano = 1;
-        }
+            (tablero[0][i] == jugador && tablero[1][i] == jugador && tablero[2][i] == jugador))
+            return 1;
     }
-
-    // Verifica diagonales
     if ((tablero[0][0] == jugador && tablero[1][1] == jugador && tablero[2][2] == jugador) ||
-        (tablero[0][2] == jugador && tablero[1][1] == jugador && tablero[2][0] == jugador)) {
-        gano = 1;
-    }
+        (tablero[0][2] == jugador && tablero[1][1] == jugador && tablero[2][0] == jugador))
+        return 1;
 
-    return gano;
+    return 0;
 }
 
-
-// Verifica si todas las casillas del tablero están ocupadas
 int tableroLleno(char tablero[3][3]) {
-    int lleno = 1;  // Asumimos que está lleno
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            if (tablero[i][j] != JUGADOR1 && tablero[i][j] != JUGADOR2)
+                return 0;
+    return 1;
+}
 
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            if (tablero[i][j] != JUGADOR1 && tablero[i][j] != JUGADOR2) {
-                lleno = 0;  // Si hay una casilla vacía, no está lleno
+// --- Lógica de dificultad ---
+
+int casillaRandom(char tablero[3][3], char jugador) {
+    int fila, col, casilla;
+    do {
+        casilla = (rand() % 9) + 1;
+        numeroACoordenadas(casilla, &fila, &col);
+    } while (!esMovimientoValido(tablero, fila, col));
+    return casilla;
+}
+
+int dificultadDificil(char tablero[3][3], char jugador) {
+    int fila, col;
+    char oponente = (jugador == JUGADOR1) ? JUGADOR2 : JUGADOR1;
+
+    // Intentar ganar
+    for (int i = 1; i <= 9; i++) {
+        numeroACoordenadas(i, &fila, &col);
+        if (esMovimientoValido(tablero, fila, col)) {
+            char temp = tablero[fila][col];
+            tablero[fila][col] = jugador;
+            if (hayGanador(tablero, jugador)) {
+                tablero[fila][col] = temp;
+                return i;
             }
+            tablero[fila][col] = temp;
         }
     }
 
-    return lleno;
+    // Bloquear oponente
+    for (int i = 1; i <= 9; i++) {
+        numeroACoordenadas(i, &fila, &col);
+        if (esMovimientoValido(tablero, fila, col)) {
+            char temp = tablero[fila][col];
+            tablero[fila][col] = oponente;
+            if (hayGanador(tablero, oponente)) {
+                tablero[fila][col] = temp;
+                return i;
+            }
+            tablero[fila][col] = temp;
+        }
+    }
+
+    // Centro
+    if (tablero[1][1] != JUGADOR1 && tablero[1][1] != JUGADOR2)
+        return 5;
+
+    // Esquinas
+    int esquinas[] = {1, 3, 7, 9};
+    for (int i = 0; i < 4; i++) {
+        numeroACoordenadas(esquinas[i], &fila, &col);
+        if (esMovimientoValido(tablero, fila, col))
+            return esquinas[i];
+    }
+
+    // Aleatorio
+    return casillaRandom(tablero, jugador);
 }

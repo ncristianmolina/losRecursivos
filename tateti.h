@@ -8,13 +8,14 @@
 #define JUGADOR1 'X'
 #define JUGADOR2 'O'
 
+// Declaraciones de funciones
 void numeroACoordenadas(int num, int *fila, int *col);
 void inicializarTablero(char tablero[3][3]);
 void mostrarTablero(char tablero[3][3]);
 int esMovimientoValido(char tablero[3][3], int fila, int col);
-void pedirMovimiento(char tablero[3][3], char jugador, int contraBot);
+void pedirMovimiento(char tablero[3][3], char jugador, int contraBot, int dificultad);
 int hayGanador(char tablero[3][3], char jugador);
 int tableroLleno(char tablero[3][3]);
-void jugar(int contraBot);
+void jugar(int contraBot, int dificultad);
 
 #endif // TATETI_H_INCLUDED

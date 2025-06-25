@@ -19,19 +19,30 @@ int loginJugador(stJugador* jugadorLogueado) {
     }
 
     printf("\n----- INICIO DE SESIÓN -----\n");
-    printf("Username: ");
-    fflush(stdin);
-    gets(username);
+    do {
+        printf("Username: ");
+        fflush(stdin);
+        fgets(username, sizeof(username), stdin);
+        username[strcspn(username, "\n")] = '\0';
+        convertirMinusculas(username);
+        printf("DEBUG: Username ingresado (post-minusculas): '%s'\n", username);
+    } while (strlen(username) == 0);
 
-    printf("Password: ");
-    fflush(stdin);
-    gets(password);
+    do {
+        printf("Password: ");
+        fflush(stdin);
+        fgets(password, sizeof(password), stdin);
+        password[strcspn(password, "\n")] = '\0';
+        printf("DEBUG: Password ingresado: '%s'\n", password);
+    } while (strlen(password) == 0);
 
     stJugador aux;
     int encontrado = 0;
 
     while (fread(&aux, sizeof(stJugador), 1, arch) > 0) {
-        if (strcmpi(aux.username, username) == 0 && strcmp(aux.password, password) == 0 && aux.eliminado == 0) {
+        printf("DEBUG: Leyendo jugador - Username: '%s', Password: '%s', Eliminado: %d\n",
+               aux.username, aux.password, aux.eliminado);
+        if (strcmp(aux.username, username) == 0 && strcmp(aux.password, password) == 0 && aux.eliminado == 0) {
             *jugadorLogueado = aux;
             encontrado = 1;
             break;

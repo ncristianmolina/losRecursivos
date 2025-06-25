@@ -4,17 +4,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "jugador.h"  // ✅ Ya incluye la estructura
+#include "jugador.h"
 
-/// FUNCIONES CON VALIDACIONES
-int validarSoloLetras(char cadena[]);
-int validarPassword(char clave[]);
-int validarEmail(char correo[]);
-int validarDNI(char dni[]);
-void convertirMinusculas(char cadena[]);
-
-/// ARCHIVO
-int obtenerUltimoID();
-void guardarJugadorArchivo(stJugador jugador);
+int loginJugador(stJugador* jugadorLogueado);
+void jugarContraMaquina(stJugador* jugador);
+void jugarContraJugador(stJugador* jugador);
+void eliminarCuenta(stJugador* jugador);
+void guardarCambiosJugador(stJugador jugadorActualizado);
 
 #endif // INICIO_SESION_H_INCLUDED

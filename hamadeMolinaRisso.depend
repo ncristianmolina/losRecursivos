@@ -208,3 +208,91 @@
 
 1750643664 c:\users\luciana\desktop\losrecursivos\partidasxjugador.h
 
+1750824887 source:c:\users\cris\losrecursivos\inicio-sesion.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"registro.h"
+	"jugador.h"
+	"tateti.h"
+	"mock.h"
+	<locale.h>
+
+1750825725 c:\users\cris\losrecursivos\registro.h
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<ctype.h>
+	"tateti.h"
+	"jugador.h"
+
+1750820970 c:\users\cris\losrecursivos\tateti.h
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1750734235 c:\users\cris\losrecursivos\jugador.h
+
+1750821607 c:\users\cris\losrecursivos\mock.h
+	"jugador.h"
+
+1750823754 source:c:\users\cris\losrecursivos\main.c
+	<stdio.h>
+	<stdlib.h>
+	"inicio-sesion.h"
+	"registro.h"
+	"tateti.h"
+	"jugador.h"
+	"mock.h"
+	"partidas.h"
+	<locale.h>
+
+1750825731 c:\users\cris\losrecursivos\inicio-sesion.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jugador.h"
+
+1750734235 c:\users\cris\losrecursivos\partidas.h
+
+1750734235 source:c:\users\cris\losrecursivos\mock.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<locale.h>
+	"mock.h"
+	"jugador.h"
+
+1750734235 source:c:\users\cris\losrecursivos\partidas.c
+	<stdio.h>
+	<stdlib.h>
+	"inicio-sesion.h"
+	"registro.h"
+	"tateti.h"
+	"jugador.h"
+	"mock.h"
+	"partidas.h"
+	<locale.h>
+
+1750551842 source:c:\users\cris\losrecursivos\preproceso.c
+
+1750824575 source:c:\users\cris\losrecursivos\registro.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"registro.h"
+	"jugador.h"
+	<locale.h>
+	"mock.h"
+
+1750821656 source:c:\users\cris\losrecursivos\tateti.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	"jugador.h"
+	"registro.h"
+	"tateti.h"
+	"mock.h"
+

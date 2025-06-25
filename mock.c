@@ -110,7 +110,7 @@ void generarJugadorAleatorio(stJugador *jugador, int idJugador) {
     void generarYGuardarJugadores(int cantidad) {
     stJugador j;
     for (int i = 0; i < cantidad; i++) {
-        int nuevoID = obtenerUltimoIDJugador() + 1;
+        int nuevoID = obtenerUltimoIDPlayer() + 1;
         generarJugadorAleatorio(&j, nuevoID);
         guardarJugadorArchivo(j);
     }
@@ -142,20 +142,20 @@ void leerJugadoresDesdeArchivo(const char *nombreArchivo) {
     }
 }
 
-int obtenerUltimoID() {
+  int obtenerUltimoIDPlayer() {
     FILE *archi = fopen("jugadores.dat", "rb");
     stJugador aux;
     int id = 0;
 
     if (archi) {
-        while (fread(&aux, sizeof(stJugador), 1, archi)) {
-            if (aux.idJugador > id) id = aux.idJugador;
-        }
-        fclose(archi);
+                while (fread(&aux, sizeof(stJugador), 1, archi)) {
+                if (aux.idJugador > id) id = aux.idJugador;
+                }
+     fclose(archi);
     }
 
     return id;
-}
+  }
 
 
 
@@ -177,7 +177,7 @@ void actualizarJugadorEnArchivo(stJugador jugador) {
 }
 
 
-int guardarJugadorArchivo(stJugador jugador) {
+/*int guardarJugadorArchivo(stJugador jugador) {
     FILE *archi = fopen("jugadores.dat", "ab");
     int resultado = 0; // 0 = error, 1 = éxito
 
@@ -190,5 +190,5 @@ int guardarJugadorArchivo(stJugador jugador) {
 
     return resultado;
 }
-
+*/
 

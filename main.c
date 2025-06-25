@@ -6,10 +6,12 @@
 #include "jugador.h"
 #include "mock.h"
 #include "partidas.h"
+#include "partidasXjugador.h"
 #include <locale.h>
 
 #define AR_JUGADORES "jugadores.dat"
 #define AR_PARTIDAS "partidas.dat"
+#define AR_PARTIDASXJUGADOR    "partidasxjugador.dat"
 
 int main() {
     setlocale(LC_ALL, "");
@@ -21,6 +23,9 @@ int main() {
         printf("1. Registrarse\n");
         printf("2. Iniciar sesion\n");
         printf("3. Salir\n");
+        printf("4. Ver archivo jugadores\n");
+        printf("5. Ver archivo partidas\n");
+        printf("6. Ver archivo partidas por jugador\n");
         printf("Seleccione una opcion: ");
         scanf("%d", &opcion);
         fflush(stdin);
@@ -76,12 +81,35 @@ int main() {
                 salir = 1;
                 printf("\n👋 ¡Gracias por usar el sistema!\n");
                 break;
+                case 4:
+                printf("\n--- Contenido de %s ---\n", AR_JUGADORES);
+                leerJugadoresDesdeArchivo(AR_JUGADORES);
+                break;
+
+            case 5:
+                printf("\n--- Contenido de %s ---\n", AR_PARTIDAS);
+                leerPartidasDesdeArchivo(AR_PARTIDAS);
+                break;
+
+            case 6:
+                printf("\n--- Contenido de %s ---\n", AR_PARTIDASXJUGADOR);
+                leerPartidasPorJugadorDesdeArchivo(AR_PARTIDASXJUGADOR);
+                break;
+
+           case 7:
+                int n;
+                printf("¿Cuántos jugadores generar? ");
+                scanf("%d", &n);
+                generarYGuardarJugadores(n);
+                break;
+
+
             default:
                 printf("❌ Opción no válida. Intente de nuevo.\n");
         }
     }
 
-    stJugador todosLosJugadores[TOTAL_JUGADORES];
+//    stJugador todosLosJugadores[TOTAL_JUGADORES];
 
     /// Copiar los jugadores precargados al arreglo total
     /*for (int i = 0; i < NUM_JUGADORES_PRECARGADOS; i++) {
@@ -89,29 +117,29 @@ int main() {
     }///*/
 
     // Generar jugadores aleatorios
-    for (int i = NUM_JUGADORES_CARGADOS; i < TOTAL_JUGADORES; i++) {
-        generarJugadorAleatorio(&todosLosJugadores[i], i + 1);
-    }
+    //for (int i = NUM_JUGADORES_CARGADOS; i < TOTAL_JUGADORES; i++) {
+     //   generarJugadorAleatorio(&todosLosJugadores[i], i + 1);
+    //}
 
     // Mostrar todos los jugadores
-    for (int i = 0; i < TOTAL_JUGADORES; i++) {
-        imprimirJugador(todosLosJugadores[i]);
-    }
+    //for (int i = 0; i < TOTAL_JUGADORES; i++) {
+       // imprimirJugador(todosLosJugadores[i]);
+    ////}
 
-    guardarJugadoresEnArchivo(AR_JUGADORES, todosLosJugadores, TOTAL_JUGADORES);
-    leerJugadoresDesdeArchivo(AR_JUGADORES);
-    printf("Guardando archivo en ruta: %s\n", AR_JUGADORES);
+    //guardarJugadoresEnArchivo(AR_JUGADORES, todosLosJugadores, TOTAL_JUGADORES);
+    //leerJugadoresDesdeArchivo(AR_JUGADORES);
+    //printf("Guardando archivo en ruta: %s\n", AR_JUGADORES);
 
 
-    stPartida partidas[100];
+    //stPartida partidas[100];///
 
-    for (int i = 0; i < 100; i++) {
-        generarPartidaAleatoria(&partidas[i], i + 1);
-    }
+    //for (int i = 0; i < 100; i++) {
+       // generarPartidaAleatoria(&partidas[i], i + 1);
+    //}
 
-    guardarPartidasEnArchivo("partidas.dat", partidas, 100);
-    leerPartidasDesdeArchivo("partidas.dat");
-
+    //guardarPartidasEnArchivo(AR_PARTIDAS, partidas, 100);
+    //leerPartidasDesdeArchivo(AR_PARTIDAS);
+        ///
 
 
     return 0;

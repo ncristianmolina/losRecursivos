@@ -66,7 +66,7 @@ void generarPartidaAleatoria(stPartida *partida, int idPartida)
     if (archi) {
         fwrite(partida, sizeof(stPartida), cantidad, archi);
         fclose(archi);
-        printf("Se guardaron %d partidas en el archivo binario.\n", cantidad);
+        printf("Se guardaron %d partidas en el archivo.\n", cantidad);
     }
 
 

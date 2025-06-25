@@ -70,7 +70,7 @@ int main() {
                                 break;
                             case 4:
                                 cerrarSesion = 1;
-                                printf("\n👋 Sesión cerrada.\n");
+                                printf("\n Sesión cerrada.\n");
                                 break;
                             default:
                                 printf("❌ Opción no válida.\n");
@@ -81,7 +81,7 @@ int main() {
             }
             case 3:
                 salir = 1;
-                printf("\n👋 ¡Gracias por usar el sistema!\n");
+                printf("\n ¡Gracias por usar el sistema!\n");
                 break;
                 case 4:
                 printf("\n--- Contenido de %s ---\n", AR_JUGADORES);

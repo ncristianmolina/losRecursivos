@@ -163,7 +163,7 @@
 	<locale.h>
 	"mock.h"
 
-1750817736 source:c:\users\luciana\desktop\losrecursivos\main.c
+1750818326 source:c:\users\luciana\desktop\losrecursivos\main.c
 	<stdio.h>
 	<stdlib.h>
 	"inicio-sesion.h"
@@ -181,7 +181,7 @@
 	<string.h>
 	"jugador.h"
 
-1750818156 source:c:\users\luciana\desktop\losrecursivos\partidas.c
+1750818582 source:c:\users\luciana\desktop\losrecursivos\partidas.c
 	<stdio.h>
 	<stdlib.h>
 	"inicio-sesion.h"

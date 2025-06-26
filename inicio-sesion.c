@@ -82,7 +82,7 @@ void eliminarCuenta(stJugador* jugador) {
             aux.eliminado = 1;
             fseek(arch, -sizeof(stJugador), SEEK_CUR);
             fwrite(&aux, sizeof(stJugador), 1, arch);
-            printf("\n🗑 Cuenta eliminada correctamente.\n");
+            printf("\n Cuenta eliminada correctamente.\n");
             encontrado = 1;
             break;
         }
@@ -111,4 +111,27 @@ void guardarCambiosJugador(stJugador jugadorActualizado) {
     }
 
     fclose(archi);
+}
+
+void cambiarUsername(stJugador* jugador) {
+    char nuevoUsername[30];
+    printf("\n----- CAMBIAR USERNAME -----\n");
+    do {
+        printf("Ingrese nuevo username: ");
+        fflush(stdin);
+        fgets(nuevoUsername, sizeof(nuevoUsername), stdin);
+        nuevoUsername[strcspn(nuevoUsername, "\n")] = '\0';
+        convertirMinusculas(nuevoUsername);
+        printf("DEBUG: Nuevo username ingresado (post-minusculas): '%s'\n", nuevoUsername);
+        if (strlen(nuevoUsername) == 0) {
+            printf("❌ El username no puede estar vacío.\n");
+        } else if (existeUsernameEnArchivo(nuevoUsername)) {
+            printf("❌ Ese username ya está en uso. Elija otro.\n");
+        }
+    } while (strlen(nuevoUsername) == 0 || existeUsernameEnArchivo(nuevoUsername));
+
+    // Actualizar solo el username en la estructura
+    strcpy(jugador->username, nuevoUsername);
+    guardarCambiosJugador(*jugador);
+    printf("\n✅ Username actualizado a '%s' con éxito!\n", jugador->username);
 }

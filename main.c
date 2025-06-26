@@ -100,6 +100,7 @@ int main() {
                         printf("3. Eliminar mi cuenta\n");
                         printf("4. Cerrar sesión\n");
                         printf("5. Ver mi historial de partidas\n");
+                        printf("6. Cambiar mi username\n"); // Nueva opción
                         printf("Seleccione una opción: ");
                         scanf("%d", &opcionPostLogin);
                         while (getchar() != '\n'); // Consumir el salto de línea
@@ -138,7 +139,7 @@ int main() {
                                     printf("DEBUG: Partida para Jugador %s - ID Partida: %d, Resultado: %d, Puntos: %d\n",
                                            jugadorLogueado.username, partida.idPartida, pxj.resultado, pxj.puntosJugador);
                                 } else {
-                                    printf( "Dificultad inválida.\n");
+                                    printf("Dificultad inválida.\n");
                                 }
                                 break;
                             }
@@ -193,6 +194,10 @@ int main() {
                                 mostrarHistorialPartidasJugador(jugadorLogueado.idJugador);
                                 break;
                             }
+                            case 6: {
+                                cambiarUsername(&jugadorLogueado); // Nueva funcionalidad para cambiar username
+                                break;
+                            }
                             default:
                                 printf(" Opción no válida.\n");
                         }
@@ -225,28 +230,28 @@ int main() {
                 leerPartidasPorJugadorDesdeArchivo(AR_PARTIDASXJUGADOR);
                 break;
 
-           case 8: {
-                    int n;
-                    printf("¿Cuántos jugadores generar? ");
-                    scanf("%d", &n);
-                    generarYGuardarJugadores(n);
-                    break;
-                    }
+            case 8: {
+                int n;
+                printf("¿Cuántos jugadores generar? ");
+                scanf("%d", &n);
+                generarYGuardarJugadores(n);
+                break;
+            }
 
             case 9: {
-                    int n;
-                    printf("Partidas a generar ");
-                    scanf("%d", &n);
-                    generarYGuardarPartidas(n);
-                    break;
-                    }
+                int n;
+                printf("Partidas a generar ");
+                scanf("%d", &n);
+                generarYGuardarPartidas(n);
+                break;
+            }
             case 10: {
-                      int n;
-                      printf("Partidas por jugador a generar: ");
-                      scanf("%d", &n);
-                      generarYGuardarPartidasXJugadorAutom(n);  // llamamos a la función nueva
-                      break;
-                      }
+                int n;
+                printf("Partidas por jugador a generar: ");
+                scanf("%d", &n);
+                generarYGuardarPartidasXJugadorAutom(n);  // Llamamos a la función nueva
+                break;
+            }
 
             default:
                 printf("Opción no válida.\n");

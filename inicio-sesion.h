@@ -11,5 +11,6 @@ void jugarContraMaquina(stJugador* jugador);
 void jugarContraJugador(stJugador* jugador);
 void eliminarCuenta(stJugador* jugador);
 void guardarCambiosJugador(stJugador jugadorActualizado);
+void cambiarUsername(stJugador* jugador);
 
 #endif // INICIO_SESION_H_INCLUDED

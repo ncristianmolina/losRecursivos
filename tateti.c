@@ -15,7 +15,7 @@ int jugar(int contraBot, int dificultad) {
     inicializarTablero(tablero);
 
     if (contraBot) {
-        printf("\nSeleccione dificultad:\n1. Fácil\n2. Difícil\nOpción: ");
+        printf("\nSeleccione dificultad:\n1. Aprendiz\n2. Terrorista\n Opcion: ");
         scanf("%d", &dificultad);
         while (getchar() != '\n'); // Limpiar búfer en lugar de fflush(stdin)
         if (dificultad != 1 && dificultad != 2) {
@@ -92,7 +92,7 @@ void pedirMovimiento(char tablero[3][3], char jugador, int contraBot, int dificu
             if (input >= '1' && input <= '9') {
                 numeroACoordenadas(input - '1' + 1, &fila, &col);
             } else {
-                printf("Entrada inválida. Solo se permiten números del 1 al 9.\n");
+                printf("Entrada invalida. Solo se permiten numeros del 1 al 9.\n");
                 continue;
             }
         } while (!(input >= '1' && input <= '9') || !esMovimientoValido(tablero, fila, col));

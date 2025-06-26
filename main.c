@@ -21,9 +21,9 @@ int mostrarSubmenuAutenticacion(stJugador *jugador, int jugadorNumero) {
     printf("\n=== Autenticación Jugador %d ===\n", jugadorNumero);
     while (1) {
         printf("1. Registrarse\n");
-        printf("2. Iniciar sesión\n");
+        printf("2. Iniciar sesion\n");
         printf("3. Salir\n");
-        printf("Seleccione una opción: ");
+        printf("Seleccione una opcion: ");
         scanf("%d", &opcion);
         while (getchar() != '\n'); // Limpiar búfer
 
@@ -32,7 +32,7 @@ int mostrarSubmenuAutenticacion(stJugador *jugador, int jugadorNumero) {
                 int ultimoID = obtenerUltimoID();
                 *jugador = cargarUnJugador(ultimoID);
                 guardarJugadorArchivo(*jugador);
-                printf("\n Jugador %d registrado con éxito!\n", jugadorNumero);
+                printf("\n Jugador %d registrado con exito!\n", jugadorNumero);
                 //imprimirJugadoresArchivo(); // Depuración
                 return 1; // Autenticado
             }
@@ -49,7 +49,7 @@ int mostrarSubmenuAutenticacion(stJugador *jugador, int jugadorNumero) {
                 return 0; // No autenticado
             }
             default:
-                printf(" Opción no válida. Intenta de nuevo.\n");
+                printf(" Opcion no valida. Intenta de nuevo.\n");
         }
     }
 }
@@ -61,9 +61,9 @@ int main() {
     int opcion, salir = 0;
 
     while (!salir) {
-        printf("\n============== Menú Principal ==============\n");
+        printf("\n============== Menu Principal ==============\n");
         printf("1. Registrarse\n");
-        printf("2. Iniciar sesión\n");
+        printf("2. Iniciar sesion\n");
         printf("3. Salir\n");
 
         /** Luciana agregó estas opciones para poder probar la correcta persistencia de los archivos**/
@@ -74,7 +74,7 @@ int main() {
         printf("8. Cargar partidas\n");
         printf("9. Cargar partidas por jugador\n");
         /** **/
-        printf("Seleccione una opción: ");
+        printf("Seleccione una opcion: ");
         scanf("%d", &opcion);
         while (getchar() != '\n'); // Consumir el salto de línea
 
@@ -110,8 +110,8 @@ int main() {
                             case 1: {
                                 int dificultad;
                                 printf("\nSeleccione la dificultad:\n");
-                                printf("1. Fácil\n");
-                                printf("2. Difícil\n");
+                                printf("1. Aprendiz\n");
+                                printf("2. Terrorista\n");
                                 printf("Opción: ");
                                 scanf("%d", &dificultad);
                                 while (getchar() != '\n'); // Consumir el salto de línea
@@ -121,7 +121,7 @@ int main() {
                                     // Generar una partida
                                     stPartida partida;
                                     partida.idPartida = obtenerUltimoIDPartida() + 1;
-                                    strcpy(partida.dificultad, dificultad == 1 ? "Fácil" : "Difícil");
+                                    strcpy(partida.dificultad, dificultad == 1 ? "Aprendiz" : "Terrorista");
                                     partida.esContraCpu = 1;
                                     FILE *partidasFile = fopen(AR_PARTIDAS, "ab");
                                     if (partidasFile) {
@@ -171,9 +171,9 @@ int main() {
                                 if (partidasFile) {
                                     fwrite(&partida, sizeof(stPartida), 1, partidasFile);
                                     fclose(partidasFile);
-                                    printf("DEBUG: Partida guardada en %s - ID: %d\n", AR_PARTIDAS, partida.idPartida);
+                                    printf("Partida guardada en %s - ID: %d\n", AR_PARTIDAS, partida.idPartida);
                                 } else {
-                                    printf("DEBUG: No se pudo abrir %s para guardar la partida.\n", AR_PARTIDAS);
+                                    printf("No se pudo abrir %s para guardar la partida.\n", AR_PARTIDAS);
                                 }
 
                                 // Jugar y obtener el resultado
@@ -205,7 +205,7 @@ int main() {
                                 break;
                             }
                             default:
-                                printf(" Opción no válida.\n");
+                                printf(" Opcion no valida.\n");
                         }
                     }
                 }

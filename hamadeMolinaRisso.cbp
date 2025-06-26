@@ -31,6 +31,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="README.txt" />
 		<Unit filename="inicio-sesion.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -51,9 +52,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="partidasXjugador.h" />
-		<Unit filename="preproceso.c">
+		<Unit filename="ranking.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="ranking.h" />
 		<Unit filename="registro.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -65,15 +65,14 @@ int main() {
         printf("1. Registrarse\n");
         printf("2. Iniciar sesión\n");
         printf("3. Salir\n");
-        printf("4. Ver ranking\n");
 
         /** Luciana agregó estas opciones para poder probar la correcta persistencia de los archivos**/
-        printf("5. Ver archivo jugadores\n");
-        printf("6. Ver archivo partidas\n");
-        printf("7. Ver archivo partidas por jugador\n");
-        printf("8. Cargar jugadores\n");
-        printf("9. Cargar partidas\n");
-        printf("10. Cargar partidas por jugador\n");
+        printf("4. Ver archivo jugadores\n");
+        printf("5. Ver archivo partidas\n");
+        printf("6. Ver archivo partidas por jugador\n");
+        printf("7. Cargar jugadores\n");
+        printf("8. Cargar partidas\n");
+        printf("9. Cargar partidas por jugador\n");
         /** **/
         printf("Seleccione una opción: ");
         scanf("%d", &opcion);
@@ -217,27 +216,23 @@ int main() {
                 printf("\n ¡Gracias por jugar!\n");
                 break;
             }
-            case 4: {
-                mostrarRankingJugadores();
-                break;
-            }
 
-            case 5:
+            case 4:
                 printf("\n--- Contenido de %s ---\n", ARCHIVO_JUGADORES);
                 leerJugadoresDesdeArchivo(ARCHIVO_JUGADORES);
                 break;
 
-            case 6:
+            case 5:
                 printf("\n--- Contenido de %s ---\n", AR_PARTIDAS);
                 leerPartidasDesdeArchivo(AR_PARTIDAS);
                 break;
 
-            case 7:
+            case 6:
                 printf("\n--- Contenido de %s ---\n", AR_PARTIDASXJUGADOR);
                 leerPartidasPorJugadorDesdeArchivo(AR_PARTIDASXJUGADOR);
                 break;
 
-            case 8: {
+            case 7: {
                 int n;
                 printf("¿Cuántos jugadores generar? ");
                 scanf("%d", &n);
@@ -245,14 +240,14 @@ int main() {
                 break;
             }
 
-            case 9: {
+            case 8: {
                 int n;
                 printf("Partidas a generar ");
                 scanf("%d", &n);
                 generarYGuardarPartidas(n);
                 break;
             }
-            case 10: {
+            case 9: {
                 int n;
                 printf("Partidas por jugador a generar: ");
                 scanf("%d", &n);

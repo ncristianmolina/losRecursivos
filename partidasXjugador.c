@@ -10,6 +10,9 @@
 #define AR_PARTIDASXJUGADOR "partidasxjugador.dat"
 #define ARCHIVO_JUGADORES "jugadores.dat"
 
+
+/**Hecha por Luciana. Muestra partida por jugador**/
+
 void imprimirPartidasporJugador(stPartidaXJugador pxj) {
     printf("ID Partida Jugador: %d\n", pxj.idPartidaJugador);
     printf("ID Partida: %d\n", pxj.idPartida);
@@ -18,6 +21,8 @@ void imprimirPartidasporJugador(stPartidaXJugador pxj) {
     printf("Puntos Jugador: %d\n", pxj.puntosJugador);
     printf("----------------------------------------\n");
 }
+
+/** Hecha por Luciana. Genera partida por jugador**/
 
 stPartidaXJugador generarPartidaXJugador(int idPartidaJugador, int idPartida, int idJugador, int resultado) {
     stPartidaXJugador pxj;
@@ -36,6 +41,7 @@ stPartidaXJugador generarPartidaXJugador(int idPartidaJugador, int idPartida, in
     return pxj;
 }
 
+/**Hecha por Luciana. Guarda partidas por jugador en archivo**/
 void guardarPartidasxJugadorEnArchivo(const char *nombreArchivo, stPartidaXJugador *pxj, int cantidad) {
     FILE *archi = fopen(nombreArchivo, "ab");
     if (archi) {
@@ -45,7 +51,7 @@ void guardarPartidasxJugadorEnArchivo(const char *nombreArchivo, stPartidaXJugad
     printf("Se guardaron %d partidas por jugador en el archivo.\n", cantidad);
 
 }
-
+/**Hecha por Luciana. Muestra partidas por jugador almacenadas en el archivo**/
 void leerPartidasPorJugadorDesdeArchivo(const char *nombreArchivo) {
     FILE *archi = fopen(nombreArchivo, "rb");
     if (archi) {
@@ -206,7 +212,7 @@ void mostrarHistorialPartidasJugador(int idJugador) {
     }
 }
 
-
+/**Hecha por Luciana. Guarda partidas en archivo, actualiza los registros de los jugadores involucrados**/
 void guardarPartidaYRegistros(stJugador *j1, stJugador *j2, int resultado1, int resultado2, const char *modo) {
     int idPartida = obtenerUltimoIDPartida() + 1;
 
@@ -280,6 +286,8 @@ void mostrarRankingJugadores() {
         printf("Error al abrir el archivo %s.\n", ARCHIVO_JUGADORES);
     }
 }
+
+/**Hecha por Luciana.Genera partidas por jugador de manera aleatoria según cantidad indicada**/
 
 void generarYGuardarPartidasXJugadorAutom(int cantidad) {
     stPartidaXJugador *registros = malloc(cantidad * sizeof(stPartidaXJugador));

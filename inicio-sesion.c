@@ -9,6 +9,7 @@
 
 // ========== LOGIN ==========
 
+/* Hecho por Cristian. Autentica usuario con credenciales. */
 int loginJugador(stJugador* jugadorLogueado) {
     char username[30], password[20];
     FILE* arch = fopen(ARCHIVO_JUGADORES, "rb");
@@ -25,7 +26,6 @@ int loginJugador(stJugador* jugadorLogueado) {
         fgets(username, sizeof(username), stdin);
         username[strcspn(username, "\n")] = '\0';
         convertirMinusculas(username);
-        printf("DEBUG: Username ingresado (post-minusculas): '%s'\n", username);
     } while (strlen(username) == 0);
 
     do {
@@ -33,7 +33,6 @@ int loginJugador(stJugador* jugadorLogueado) {
         fflush(stdin);
         fgets(password, sizeof(password), stdin);
         password[strcspn(password, "\n")] = '\0';
-        printf("DEBUG: Password ingresado: '%s'\n", password);
     } while (strlen(password) == 0);
 
     stJugador aux;
@@ -50,24 +49,27 @@ int loginJugador(stJugador* jugadorLogueado) {
     fclose(arch);
 
     if (!encontrado) {
-        printf("\n❌ Usuario y/o contraseña incorrectos o cuenta eliminada.\n");
+        printf("\ Usuario y/o contrasenia incorrectos o cuenta eliminada.\n");
         return 0;
     }
 
-    printf("\n✅ ¡Bienvenido %s %s!\n", jugadorLogueado->nombre, jugadorLogueado->apellido);
+    printf("\n¡Bienvenido %s %s!\n", jugadorLogueado->nombre, jugadorLogueado->apellido);
     return 1;
 }
 
 // ========== FUNCIONES EXTRAS ==========
 
+/* Hecho por Cristian. Inicia juego contra máquina. */
 void jugarContraMaquina(stJugador* jugador) {
-    printf("🕹 Jugando contra la máquina...\n");
+    printf("Jugando contra la máquina...\n");
 }
 
+/* Hecho por Cristian. Inicia juego contra jugador. */
 void jugarContraJugador(stJugador* jugador) {
-    printf("🎮 Jugando contra otro jugador...\n");
+    printf("Jugando contra otro jugador...\n");
 }
 
+/* Hecho por Cristian. Marca cuenta como eliminada. */
 void eliminarCuenta(stJugador* jugador) {
     FILE* arch = fopen(ARCHIVO_JUGADORES, "rb+");
     if (!arch) {
@@ -94,6 +96,7 @@ void eliminarCuenta(stJugador* jugador) {
     }
 }
 
+/* Hecho por Cristian. Actualiza datos jugador archivo. */
 void guardarCambiosJugador(stJugador jugadorActualizado) {
     FILE* archi = fopen(ARCHIVO_JUGADORES, "rb+");
     if (!archi) {
@@ -113,6 +116,7 @@ void guardarCambiosJugador(stJugador jugadorActualizado) {
     fclose(archi);
 }
 
+/* Hecho por Cristian. Modifica username jugador archivo. */
 void cambiarUsername(stJugador* jugador) {
     char nuevoUsername[30];
     printf("\n----- CAMBIAR USERNAME -----\n");
@@ -122,16 +126,15 @@ void cambiarUsername(stJugador* jugador) {
         fgets(nuevoUsername, sizeof(nuevoUsername), stdin);
         nuevoUsername[strcspn(nuevoUsername, "\n")] = '\0';
         convertirMinusculas(nuevoUsername);
-        printf("DEBUG: Nuevo username ingresado (post-minusculas): '%s'\n", nuevoUsername);
         if (strlen(nuevoUsername) == 0) {
-            printf("❌ El username no puede estar vacío.\n");
+            printf("El username no puede estar vacío.\n");
         } else if (existeUsernameEnArchivo(nuevoUsername)) {
-            printf("❌ Ese username ya está en uso. Elija otro.\n");
+            printf("Ese username ya está en uso. Elija otro.\n");
         }
     } while (strlen(nuevoUsername) == 0 || existeUsernameEnArchivo(nuevoUsername));
 
     // Actualizar solo el username en la estructura
     strcpy(jugador->username, nuevoUsername);
     guardarCambiosJugador(*jugador);
-    printf("\n✅ Username actualizado a '%s' con éxito!\n", jugador->username);
+    printf("\nUsername actualizado a '%s' con éxito!\n", jugador->username);
 }

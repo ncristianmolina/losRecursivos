@@ -6,8 +6,7 @@
 
 #define SIZE 3
 
-// Función principal del juego. Controla la partida.
-// Devuelve: 1 = Jugador 1 gana, 2 = Jugador 2 gana, 0 = empate
+/* Hecho por Cristian. Gestiona partida y determina ganador. */
 int jugar(int contraBot, int dificultad) {
     char tablero[3][3];
     char jugador = JUGADOR1;
@@ -46,6 +45,7 @@ int jugar(int contraBot, int dificultad) {
     return 0; // Por completitud, aunque no debería llegar aquí
 }
 
+/* Hecha por Luciana. Inicializa tablero con números. */
 void inicializarTablero(char tablero[3][3]) {
     char num = '1';
     for (int i = 0; i < 3; i++)
@@ -53,6 +53,7 @@ void inicializarTablero(char tablero[3][3]) {
             tablero[i][j] = num++;
 }
 
+/* Hecha por Luciana. Muestra tablero en pantalla. */
 void mostrarTablero(char tablero[3][3]) {
     system("cls");
     printf("\n");
@@ -63,10 +64,12 @@ void mostrarTablero(char tablero[3][3]) {
     printf("\n");
 }
 
+/* Hecho por Cristian. Verifica validez movimiento tablero. */
 int esMovimientoValido(char tablero[3][3], int fila, int col) {
     return tablero[fila][col] != JUGADOR1 && tablero[fila][col] != JUGADOR2;
 }
 
+/* Hecho por Cristian. Solicita y aplica movimiento jugador. */
 void pedirMovimiento(char tablero[3][3], char jugador, int contraBot, int dificultad) {
     int fila, col;
     char input;
@@ -98,12 +101,14 @@ void pedirMovimiento(char tablero[3][3], char jugador, int contraBot, int dificu
     }
 }
 
+/* Hecho por Luciana. Convierte número a coordenadas. */
 void numeroACoordenadas(int num, int *fila, int *col) {
     int indice = num - 1;
     *fila = indice / 3;
     *col = indice % 3;
 }
 
+/* Hecho por Cristian. Verifica si hay ganador tablero. */
 int hayGanador(char tablero[3][3], char jugador) {
     for (int i = 0; i < 3; i++) {
         if ((tablero[i][0] == jugador && tablero[i][1] == jugador && tablero[i][2] == jugador) ||
@@ -117,6 +122,7 @@ int hayGanador(char tablero[3][3], char jugador) {
     return 0;
 }
 
+/* Hecho por Cristian. Verifica si tablero está lleno. */
 int tableroLleno(char tablero[3][3]) {
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
@@ -125,6 +131,7 @@ int tableroLleno(char tablero[3][3]) {
     return 1;
 }
 
+/* Hecho por Cristian. Selecciona casilla aleatoria válida. */
 int casillaRandom(char tablero[3][3], char jugador) {
     int fila, col, casilla;
     do {
@@ -134,6 +141,7 @@ int casillaRandom(char tablero[3][3], char jugador) {
     return casilla;
 }
 
+/* Hecho por Cristian y Luciana. Calcula movimiento difícil bot. */
 int dificultadDificil(char tablero[3][3], char jugador) {
     int fila, col;
     char oponente = (jugador == JUGADOR1) ? JUGADOR2 : JUGADOR1;

@@ -14,7 +14,7 @@
 #define EMPATE 2
 #define PERDEDOR 0
 
-
+/** Hecha por Luciana. Obtiene último id de la partida**/
 int obtenerUltimoIDPartida() {
     FILE *archi = fopen("partidas.dat", "rb");
     int ultimoID = 0;
@@ -36,7 +36,7 @@ int obtenerUltimoIDPartida() {
 
 
 
-
+/**Hecha por Luciana. Muestra partidas**/
 
 void imprimirPartidas(stPartida partida)
   {
@@ -47,7 +47,7 @@ void imprimirPartidas(stPartida partida)
    }
 
 
-
+/**Hecha por Luciana. Genera partidas de manera aleatoria**/
 void generarPartidaAleatoria(stPartida *partida, int idPartida)
 {
    const char *dificultad[] = { "Aprendiz", "Terrorista"};
@@ -60,7 +60,7 @@ void generarPartidaAleatoria(stPartida *partida, int idPartida)
 
 }
 
-
+/**Hecha por Luciana. Guarda partidas en archivo**/
  void guardarPartidasEnArchivo(const char *nombreArchivo, stPartida *partida, int cantidad) {
     FILE *archi = fopen(nombreArchivo, "ab");
     if (archi) {
@@ -71,7 +71,7 @@ void generarPartidaAleatoria(stPartida *partida, int idPartida)
 
 }
 
-
+/**Hecha por Luciana. Permite visualizar las partidas en el archivo**/
 void leerPartidasDesdeArchivo(const char *nombreArchivo) {
     FILE *archi = fopen(nombreArchivo, "rb");
     if (archi) {
@@ -84,12 +84,14 @@ void leerPartidasDesdeArchivo(const char *nombreArchivo) {
     }
 }
 
+/**Hecha por Luciana calcula resultado**/
 int calcularPuntos(int resultado) {
     if (resultado == GANADOR) return 3;
     else if (resultado == EMPATE) return 1;
     else return 0;
 }
 
+/**Hecha por Luciana. Genera y guarda partidas según cantidad indicada**/
 void generarYGuardarPartidas(int cantidad) {
     stPartida p;
     int ultimoID = obtenerUltimoIDPartida();

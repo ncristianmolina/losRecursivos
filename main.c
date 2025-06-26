@@ -65,13 +65,15 @@ int main() {
         printf("2. Iniciar sesión\n");
         printf("3. Salir\n");
         printf("4. Ver ranking\n");
+
+        /** Luciana agregó estas opciones para poder probar la correcta persistencia de los archivos**/
         printf("5. Ver archivo jugadores\n");
         printf("6. Ver archivo partidas\n");
         printf("7. Ver archivo partidas por jugador\n");
         printf("8. Cargar jugadores\n");
         printf("9. Cargar partidas\n");
         printf("10. Cargar partidas por jugador\n");
-
+        /** **/
         printf("Seleccione una opción: ");
         scanf("%d", &opcion);
         while (getchar() != '\n'); // Consumir el salto de línea

@@ -8,6 +8,8 @@
 
 #define AR_JUGADORES "jugadores.dat"
 
+
+/**Hecha por Luciana- genera contraseñas utilizando hasta caracteres especiales**/
 void generarContrasena(char *destino, int longitud) {
     const char *caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{};:,.<>?";
     int largo = strlen(caracteres);
@@ -16,6 +18,8 @@ void generarContrasena(char *destino, int longitud) {
     }
     destino[longitud - 1] = '\0';
 }
+
+/**Hecha por Luciana- Muestra un jugador**/
 
 void imprimirJugador(stJugador jugador) {
     if (jugador.eliminado == 0) {
@@ -31,6 +35,9 @@ void imprimirJugador(stJugador jugador) {
         printf("----------------------------------------\n");
     }
 }
+
+/** Hecha por Luciana. genera jugadores de manera aleatoria
+Nombres-Apellidos-países-mails-nicknames-contraseñas y dni**/
 
 void generarJugadorAleatorio(stJugador *jugador, int idJugador) {
     const char *nombres[] = {"Juan", "Ana", "Luis", "Maria", "Pedro", "Laura", "Mariano", "Sofia", "Valentina",
@@ -96,7 +103,7 @@ void generarJugadorAleatorio(stJugador *jugador, int idJugador) {
     strcpy(jugador->pais, paises[rand() % (sizeof(paises) / sizeof(paises[0]))]);
     jugador->eliminado = 0;
 }
-
+/**Hecha por Luciana: permite indicar la cantidad de registros de jugadores a generar. De esta manera, no se corrompe el archivo**/
 void generarYGuardarJugadores(int cantidad) {
     stJugador j;
     for (int i = 0; i < cantidad; i++) {
@@ -106,6 +113,7 @@ void generarYGuardarJugadores(int cantidad) {
     }
     printf("Se generaron y guardaron %d jugadores.\n", cantidad);
 }
+/**Hecha por Luciana: guarda a jugadores en un archivo**/
 
 void guardarJugadoresEnArchivo(const char *nombreArchivo, stJugador *jugadores, int cantidad) {
     FILE *archi = fopen(nombreArchivo, "ab");
@@ -116,6 +124,8 @@ void guardarJugadoresEnArchivo(const char *nombreArchivo, stJugador *jugadores, 
     }
 }
 
+
+/**Hecha por Luciana: visualiza los registros de los jugadores en el archivo**/
 void leerJugadoresDesdeArchivo(const char *nombreArchivo) {
     FILE *archi = fopen(nombreArchivo, "rb");
     if (archi) {
@@ -127,6 +137,8 @@ void leerJugadoresDesdeArchivo(const char *nombreArchivo) {
         fclose(archi);
     }
 }
+
+/** Hecha por Luciana: ID auto-incremental **/
 
 int obtenerUltimoIDPlayer() {
     FILE *archi = fopen(AR_JUGADORES, "rb");
@@ -143,6 +155,7 @@ int obtenerUltimoIDPlayer() {
     return id;
 }
 
+/** Hecha por Luciana. Actualiza registro de jugador en archivo**/
 void actualizarJugadorEnArchivo(stJugador jugador) {
     FILE *archi = fopen(AR_JUGADORES, "r+b");
     if (archi) {
@@ -153,13 +166,14 @@ void actualizarJugadorEnArchivo(stJugador jugador) {
                 if (pos >= 0) {
                     fseek(archi, pos, SEEK_SET);
                     fwrite(&jugador, sizeof(stJugador), 1, archi);
-                    break;
                 }
             }
         }
         fclose(archi);
     }
 }
+
+/**Hecha por Luciana_guarda jugador en archivo**/
 
 int guardaJugadorArchivo(stJugador jugador) {
     FILE *archi = fopen(AR_JUGADORES, "ab");

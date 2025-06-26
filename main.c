@@ -10,6 +10,7 @@
 #include "mock.h"
 #include "partidas.h"
 #include "partidasXjugador.h"
+#include "ranking.h" // Nueva inclusión
 
 #define ARCHIVO_JUGADORES "jugadores.dat"
 #define AR_PARTIDAS "partidas.dat"
@@ -100,7 +101,8 @@ int main() {
                         printf("3. Eliminar mi cuenta\n");
                         printf("4. Cerrar sesión\n");
                         printf("5. Ver mi historial de partidas\n");
-                        printf("6. Cambiar mi username\n"); // Nueva opción
+                        printf("6. Cambiar mi username\n");
+                        printf("7. Ver mis estadísticas y ranking\n"); // Nueva opción
                         printf("Seleccione una opción: ");
                         scanf("%d", &opcionPostLogin);
                         while (getchar() != '\n'); // Consumir el salto de línea
@@ -198,6 +200,11 @@ int main() {
                                 cambiarUsername(&jugadorLogueado); // Nueva funcionalidad para cambiar username
                                 break;
                             }
+                            case 7: {
+                                mostrarEstadisticasJugador(jugadorLogueado.idJugador); // Nueva funcionalidad
+                                mostrarRankingJugadores(); // Mostrar ranking
+                                break;
+                            }
                             default:
                                 printf(" Opción no válida.\n");
                         }
@@ -216,8 +223,8 @@ int main() {
             }
 
             case 5:
-                printf("\n--- Contenido de %s ---\n", AR_JUGADORES);
-                leerJugadoresDesdeArchivo(AR_JUGADORES);
+                printf("\n--- Contenido de %s ---\n", ARCHIVO_JUGADORES);
+                leerJugadoresDesdeArchivo(ARCHIVO_JUGADORES);
                 break;
 
             case 6:

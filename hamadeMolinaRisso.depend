@@ -198,7 +198,7 @@
 	"jugador.h"
 	"partidas.h"
 
-1750828284 source:c:\users\cris\losrecursivos\inicio-sesion.c
+1750963214 source:c:\users\cris\losrecursivos\inicio-sesion.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -221,7 +221,7 @@
 1750832230 c:\users\cris\losrecursivos\mock.h
 	"jugador.h"
 
-1750831932 source:c:\users\cris\losrecursivos\main.c
+1750965597 source:c:\users\cris\losrecursivos\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -234,16 +234,17 @@
 	"mock.h"
 	"partidas.h"
 	"partidasXjugador.h"
+	"ranking.h"
 
-1750827434 c:\users\cris\losrecursivos\inicio-sesion.h
+1750962406 c:\users\cris\losrecursivos\inicio-sesion.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"jugador.h"
 
-1750734235 c:\users\cris\losrecursivos\partidas.h
+1750962406 c:\users\cris\losrecursivos\partidas.h
 
-1750832301 source:c:\users\cris\losrecursivos\mock.c
+1750962406 source:c:\users\cris\losrecursivos\mock.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -252,7 +253,7 @@
 	"mock.h"
 	"jugador.h"
 
-1750826373 source:c:\users\cris\losrecursivos\partidas.c
+1750962406 source:c:\users\cris\losrecursivos\partidas.c
 	<stdio.h>
 	<stdlib.h>
 	"inicio-sesion.h"
@@ -265,7 +266,7 @@
 
 1750551842 source:c:\users\cris\losrecursivos\preproceso.c
 
-1750832427 source:c:\users\cris\losrecursivos\registro.c
+1750963866 source:c:\users\cris\losrecursivos\registro.c
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
@@ -274,18 +275,18 @@
 	"jugador.h"
 	<locale.h>
 
-1750829824 source:c:\users\cris\losrecursivos\tateti.c
+1750964506 source:c:\users\cris\losrecursivos\tateti.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<locale.h>
 	"tateti.h"
 
-1750831871 c:\users\cris\losrecursivos\partidasxjugador.h
+1750962406 c:\users\cris\losrecursivos\partidasxjugador.h
 	"jugador.h"
 	"partidas.h"
 
-1750831897 source:c:\users\cris\losrecursivos\partidasxjugador.c
+1750962944 source:c:\users\cris\losrecursivos\partidasxjugador.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -320,5 +321,15 @@
 	"jugador.h"
 	"inicio-sesion.h"
 	"partidas.h"
+	"partidasXjugador.h"
+
+1750965582 c:\users\cris\losrecursivos\ranking.h
+	"jugador.h"
+	"partidasXjugador.h"
+
+1750965589 source:c:\users\cris\losrecursivos\ranking.c
+	<stdio.h>
+	<string.h>
+	"ranking.h"
 	"partidasXjugador.h"
 

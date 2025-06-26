@@ -6,6 +6,7 @@
 #include "jugador.h"
 #include <locale.h>
 
+/* Hecho por Cristian. Carga datos nuevo jugador. */
 stJugador cargarUnJugador(int ultimoID) {
     stJugador aux;
     memset(&aux, 0, sizeof(stJugador)); // Inicializar para evitar basura
@@ -18,9 +19,8 @@ stJugador cargarUnJugador(int ultimoID) {
         printf("Ingrese su nombre: ");
         fgets(aux.nombre, sizeof(aux.nombre), stdin);
         aux.nombre[strcspn(aux.nombre, "\n")] = '\0';
-        printf("DEBUG: Nombre ingresado: '%s'\n", aux.nombre);
         if (strlen(aux.nombre) == 0 || !validarSoloLetras(aux.nombre)) {
-            printf("❌ Nombre inválido. No puede estar vacío y debe contener solo letras.\n");
+            printf("Nombre inválido. No puede estar vacío y debe contener solo letras.\n");
         }
     } while (strlen(aux.nombre) == 0 || !validarSoloLetras(aux.nombre));
 
@@ -28,9 +28,8 @@ stJugador cargarUnJugador(int ultimoID) {
         printf("Ingrese su apellido: ");
         fgets(aux.apellido, sizeof(aux.apellido), stdin);
         aux.apellido[strcspn(aux.apellido, "\n")] = '\0';
-        printf("DEBUG: Apellido ingresado: '%s'\n", aux.apellido);
         if (strlen(aux.apellido) == 0 || !validarSoloLetras(aux.apellido)) {
-            printf("❌ Apellido inválido. No puede estar vacío y debe contener solo letras.\n");
+            printf("Apellido inválido. No puede estar vacío y debe contener solo letras.\n");
         }
     } while (strlen(aux.apellido) == 0 || !validarSoloLetras(aux.apellido));
 
@@ -38,9 +37,8 @@ stJugador cargarUnJugador(int ultimoID) {
         printf("Ingrese su email: ");
         fgets(aux.email, sizeof(aux.email), stdin);
         aux.email[strcspn(aux.email, "\n")] = '\0';
-        printf("DEBUG: Email ingresado: '%s'\n", aux.email);
         if (!validarEmail(aux.email)) {
-            printf("❌ Email inválido. Debe contener '@' y '.'.\n");
+            printf("Email inválido. Debe contener '@' y '.com'.\n");
         }
     } while (!validarEmail(aux.email));
 
@@ -49,11 +47,10 @@ stJugador cargarUnJugador(int ultimoID) {
         fgets(aux.username, sizeof(aux.username), stdin);
         aux.username[strcspn(aux.username, "\n")] = '\0';
         convertirMinusculas(aux.username);
-        printf("DEBUG: Username ingresado (post-minusculas): '%s'\n", aux.username);
         if (strlen(aux.username) == 0) {
-            printf("❌ Usuario inválido. No puede estar vacío.\n");
+            printf("Usuario inválido. No puede estar vacío.\n");
         } else if (existeUsernameEnArchivo(aux.username)) {
-            printf("❌ Ese nombre de usuario ya está registrado. Elija otro.\n");
+            printf("Ese nombre de usuario ya está registrado. Elija otro.\n");
         }
     } while (strlen(aux.username) == 0 || existeUsernameEnArchivo(aux.username));
 
@@ -61,9 +58,8 @@ stJugador cargarUnJugador(int ultimoID) {
         printf("Ingrese su contraseña (mínimo una mayúscula y una minúscula): ");
         fgets(aux.password, sizeof(aux.password), stdin);
         aux.password[strcspn(aux.password, "\n")] = '\0';
-        printf("DEBUG: Password ingresado: '%s'\n", aux.password);
         if (!validarPassword(aux.password)) {
-            printf("❌ Contraseña inválida. Debe tener una mayúscula y una minúscula.\n");
+            printf("Contraseña inválida. Debe tener una mayúscula y una minúscula.\n");
         }
     } while (!validarPassword(aux.password));
 
@@ -71,9 +67,8 @@ stJugador cargarUnJugador(int ultimoID) {
         printf("Ingrese su DNI: ");
         fgets(aux.dni, sizeof(aux.dni), stdin);
         aux.dni[strcspn(aux.dni, "\n")] = '\0';
-        printf("DEBUG: DNI ingresado: '%s'\n", aux.dni);
         if (!validarDNI(aux.dni)) {
-            printf("❌ DNI inválido. Debe contener solo números y tener entre 7 y 9 dígitos.\n");
+            printf("DNI inválido. Debe contener solo números y tener entre 7 y 9 dígitos.\n");
         }
     } while (!validarDNI(aux.dni));
 
@@ -81,19 +76,19 @@ stJugador cargarUnJugador(int ultimoID) {
         printf("Ingrese su nacionalidad o país: ");
         fgets(aux.pais, sizeof(aux.pais), stdin);
         aux.pais[strcspn(aux.pais, "\n")] = '\0';
-        printf("DEBUG: Pais ingresado: '%s'\n", aux.pais);
         if (strlen(aux.pais) == 0 || !validarSoloLetras(aux.pais)) {
-            printf("❌ Nacionalidad inválida. Debe contener solo letras.\n");
+            printf("Nacionalidad inválida. Debe contener solo letras.\n");
         }
     } while (strlen(aux.pais) == 0 || !validarSoloLetras(aux.pais));
 
-    printf("\n✅ ¡Registro completado con éxito!\n");
+    printf("\n¡Registro completado con éxito!\n");
     system("pause");
     system("cls");
 
     return aux;
 }
 
+/* Hecho por Cristian. Valida si cadena letras. */
 int validarSoloLetras(char cadena[]) {
     int i = 0, valido = 1;
     while (cadena[i] != '\0' && valido) {
@@ -105,6 +100,7 @@ int validarSoloLetras(char cadena[]) {
     return valido;
 }
 
+/* Hecho por Cristian. Verifica contraseña mayúscula minúscula. */
 int validarPassword(char clave[]) {
     int i = 0, tieneMayuscula = 0, tieneMinuscula = 0;
     while (clave[i] != '\0') {
@@ -115,6 +111,7 @@ int validarPassword(char clave[]) {
     return tieneMayuscula && tieneMinuscula;
 }
 
+/* Hecho por Cristian. Valida email con arroba punto. */
 int validarEmail(char correo[]) {
     int i = 0, tieneArroba = 0, tienePunto = 0;
     while (correo[i] != '\0') {
@@ -125,6 +122,7 @@ int validarEmail(char correo[]) {
     return tieneArroba == 1 && tienePunto >= 1;
 }
 
+/* Hecho por Cristian. Valida DNI numérico longitud. */
 int validarDNI(char dni[]) {
     int i = 0, valido = 1, longitud = strlen(dni);
     if (longitud < 7 || longitud > 9) {
@@ -140,6 +138,7 @@ int validarDNI(char dni[]) {
     return valido;
 }
 
+/* Hecho por Cristian. Convierte cadena a minúsculas. */
 void convertirMinusculas(char cadena[]) {
     int i = 0;
     while (cadena[i] != '\0') {
@@ -148,6 +147,7 @@ void convertirMinusculas(char cadena[]) {
     }
 }
 
+/* Hecho por Cristian. Obtiene último ID archivo. */
 int obtenerUltimoID() {
     FILE *archivo = fopen(ARCHIVO_JUGADORES, "rb");
     stJugador aux;
@@ -168,17 +168,19 @@ int obtenerUltimoID() {
     return ultimoID;
 }
 
+/* Hecho por Cristian. Guarda jugador en archivo. */
 void guardarJugadorArchivo(stJugador jugador) {
     FILE *archivo = fopen(ARCHIVO_JUGADORES, "ab");
     if (archivo) {
         fwrite(&jugador, sizeof(stJugador), 1, archivo);
         fclose(archivo);
-        printf("DEBUG: Jugador guardado - Username: '%s', Password: '%s'\n", jugador.username, jugador.password);
+        printf("Jugador guardado - Username: '%s', Password: '%s'\n", jugador.username, jugador.password);
     } else {
         printf("Error al abrir el archivo %s.\n", ARCHIVO_JUGADORES);
     }
 }
 
+/* Hecho por Cristian. Verifica existencia username archivo. */
 int existeUsernameEnArchivo(char username[]) {
     FILE *archivo = fopen(ARCHIVO_JUGADORES, "rb");
     stJugador aux;
@@ -197,6 +199,7 @@ int existeUsernameEnArchivo(char username[]) {
     return existe;
 }
 
+/* Hecho por Cristian. Imprime jugadores desde archivo. */
 void imprimirJugadoresArchivo() {
     FILE *arch = fopen(ARCHIVO_JUGADORES, "rb");
     if (arch) {

@@ -10,9 +10,7 @@
 #define AR_PARTIDASXJUGADOR "partidasxjugador.dat"
 #define ARCHIVO_JUGADORES "jugadores.dat"
 
-
-/**Hecha por Luciana. Muestra partida por jugador**/
-
+/** Hecha por Luciana. Muestra partida por jugador **/
 void imprimirPartidasporJugador(stPartidaXJugador pxj) {
     printf("ID Partida Jugador: %d\n", pxj.idPartidaJugador);
     printf("ID Partida: %d\n", pxj.idPartida);
@@ -22,8 +20,7 @@ void imprimirPartidasporJugador(stPartidaXJugador pxj) {
     printf("----------------------------------------\n");
 }
 
-/** Hecha por Luciana. Genera partida por jugador**/
-
+/** Hecha por Luciana. Genera partida por jugador **/
 stPartidaXJugador generarPartidaXJugador(int idPartidaJugador, int idPartida, int idJugador, int resultado) {
     stPartidaXJugador pxj;
     pxj.idPartidaJugador = idPartidaJugador;
@@ -41,7 +38,7 @@ stPartidaXJugador generarPartidaXJugador(int idPartidaJugador, int idPartida, in
     return pxj;
 }
 
-/**Hecha por Luciana. Guarda partidas por jugador en archivo**/
+/** Hecha por Luciana. Guarda partidas por jugador en archivo **/
 void guardarPartidasxJugadorEnArchivo(const char *nombreArchivo, stPartidaXJugador *pxj, int cantidad) {
     FILE *archi = fopen(nombreArchivo, "ab");
     if (archi) {
@@ -49,9 +46,9 @@ void guardarPartidasxJugadorEnArchivo(const char *nombreArchivo, stPartidaXJugad
         fclose(archi);
     }
     printf("Se guardaron %d partidas por jugador en el archivo.\n", cantidad);
-
 }
-/**Hecha por Luciana. Muestra partidas por jugador almacenadas en el archivo**/
+
+/** Hecha por Luciana. Muestra partidas por jugador almacenadas en el archivo **/
 void leerPartidasPorJugadorDesdeArchivo(const char *nombreArchivo) {
     FILE *archi = fopen(nombreArchivo, "rb");
     if (archi) {
@@ -63,7 +60,6 @@ void leerPartidasPorJugadorDesdeArchivo(const char *nombreArchivo) {
         fclose(archi);
     }
 }
-
 
 int obtenerUltimoIdPartidaXJugador() {
     FILE *archi = fopen(AR_PARTIDASXJUGADOR, "rb");
@@ -111,8 +107,6 @@ void generarYGuardarPartidasXJugador(const char *archivo, stJugador *jugadores, 
 
     guardarPartidasxJugadorEnArchivo(archivo, registros, CANT_PARTIDAS_X_JUGADOR);
 }
-
-
 
 void generarPartidaXJugadorParaLogueado(stJugador jugador, int idPartida) {
     FILE *archi = fopen(AR_PARTIDASXJUGADOR, "rb");
@@ -212,7 +206,7 @@ void mostrarHistorialPartidasJugador(int idJugador) {
     }
 }
 
-/**Hecha por Luciana. Guarda partidas en archivo, actualiza los registros de los jugadores involucrados**/
+/** Hecha por Luciana. Guarda partidas en archivo, actualiza los registros de los jugadores involucrados **/
 void guardarPartidaYRegistros(stJugador *j1, stJugador *j2, int resultado1, int resultado2, const char *modo) {
     int idPartida = obtenerUltimoIDPartida() + 1;
 
@@ -236,59 +230,15 @@ void guardarPartidaYRegistros(stJugador *j1, stJugador *j2, int resultado1, int 
     guardarPartidasxJugadorEnArchivo(AR_PARTIDASXJUGADOR, pxj, cantidad);
 
     j1->ptsTotales += pxj[0].puntosJugador;
-    actualizarJugadorEnArchivo(*j1);
+    guardarCambiosJugador(*j1); // Reemplazado actualizarJugadorEnArchivo por guardarCambiosJugador
 
     if (j2 != NULL) {
         j2->ptsTotales += pxj[1].puntosJugador;
-        actualizarJugadorEnArchivo(*j2);
+        guardarCambiosJugador(*j2); // Reemplazado actualizarJugadorEnArchivo por guardarCambiosJugador
     }
 }
 
-
-
-
-
-void mostrarRankingJugadores() {
-    FILE *archi = fopen(ARCHIVO_JUGADORES, "rb");
-    if (archi) {
-        stJugador jugadores[100];
-        int count = 0;
-
-        // Leer todos los jugadores
-        while (fread(&jugadores[count], sizeof(stJugador), 1, archi) == 1 && count < 100) {
-            if (!jugadores[count].eliminado) {
-                count++;
-            }
-        }
-        fclose(archi);
-
-        // Ordenar por puntos (burbujeo descendente)
-        for (int i = 0; i < count - 1; i++) {
-            for (int j = 0; j < count - i - 1; j++) {
-                if (jugadores[j].ptsTotales < jugadores[j + 1].ptsTotales) {
-                    stJugador temp = jugadores[j];
-                    jugadores[j] = jugadores[j + 1];
-                    jugadores[j + 1] = temp;
-                }
-            }
-        }
-
-        // Mostrar ranking
-        printf("\n--- Ranking de jugadores ---\n");
-        for (int i = 0; i < count; i++) {
-            printf("%d. %s %s (ID: %d, Username: %s) - Puntos: %d\n",
-                   i + 1, jugadores[i].nombre, jugadores[i].apellido, jugadores[i].idJugador, jugadores[i].username, jugadores[i].ptsTotales);
-        }
-        if (count == 0) {
-            printf("No hay jugadores registrados.\n");
-        }
-    } else {
-        printf("Error al abrir el archivo %s.\n", ARCHIVO_JUGADORES);
-    }
-}
-
-/**Hecha por Luciana.Genera partidas por jugador de manera aleatoria según cantidad indicada**/
-
+/** Hecha por Luciana. Genera partidas por jugador de manera aleatoria según cantidad indicada **/
 void generarYGuardarPartidasXJugadorAutom(int cantidad) {
     stPartidaXJugador *registros = malloc(cantidad * sizeof(stPartidaXJugador));
     if (!registros) {

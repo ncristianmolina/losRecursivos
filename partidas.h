@@ -13,7 +13,6 @@ typedef struct {
  void generarPartidaAleatoria(stPartida *partida, int idPartida);
  void guardarPartidasEnArchivo(const char *nombreArchivo, stPartida *partida, int cantidad);
  void leerPartidasDesdeArchivo(const char *nombreArchivo) ;
- void imprimirPartidas(stPartida partida);
  int calcularPuntos(int resultado);
  void generarYGuardarPartidas(int cantidad);
  int obtenerUltimoIDPartida();
